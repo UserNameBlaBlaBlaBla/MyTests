@@ -49,15 +49,15 @@
 			<mxpg:PropertyGridControl.CellTemplate>
 				<root:CellTemplateLocator>
 					<DataTemplate DataType="sysnet:EndPoint">
-						<mxe:TextEditor ValidateOnInput="True" EditorValue="{Binding, Converter={StaticResource EndPointToStringConverter}}"/>
+						<mxe:TextEditor EditorValue="{Binding, Converter={StaticResource EndPointToStringConverter}}"/>
 					</DataTemplate>
 
 					<DataTemplate DataType="syssec:SecureString">
-						<mxe:ButtonEditor ValidateOnInput="True" EditorValue="{Binding, Converter={StaticResource SecureStringToStringConverter}}"/>
+						<mxe:ButtonEditor EditorValue="{Binding, Converter={StaticResource SecureStringToStringConverter}}"/>
 					</DataTemplate>
 
 					<DataTemplate DataType="sys:String">
-						<mxe:TextEditor ValidateOnInput="True" EditorValue="{Binding Value}"/>
+						<mxe:TextEditor EditorValue="{Binding Value}"/>
 					</DataTemplate>
 
 					<DataTemplate DataType="sys:Int32">
