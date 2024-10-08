@@ -1,0 +1,70 @@
+<mx:MxWindow xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:EremexPropertyGridTest.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mx="https://schemas.eremexcontrols.net/avalonia"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		xmlns:root="using:EremexPropertyGridTest"
+		xmlns:models="using:EremexPropertyGridTest.Models"
+		xmlns:converters="using:EremexPropertyGridTest.Converters"
+		xmlns:sys="clr-namespace:System;assembly=mscorlib"
+		xmlns:syssec="clr-namespace:System.Security;assembly=System.Runtime.InteropServices"
+		xmlns:sysnet="clr-namespace:System.Net;assembly=System.Net.Primitives"
+		xmlns:mxpg="clr-namespace:Eremex.AvaloniaUI.Controls.PropertyGrid;assembly=Eremex.Avalonia.Controls"
+		xmlns:mxe="clr-namespace:Eremex.AvaloniaUI.Controls.Editors;assembly=Eremex.Avalonia.Controls"
+        x:Class="EremexPropertyGridTest.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/EMXControls.ico"
+        Title="EremexPropertyGridTest">
+
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
+
+	<mx:MxWindow.Resources>
+		<converters:SecureStringToStringConverter x:Key="SecureStringToStringConverter"/>
+		<converters:EndPointToStringConverter x:Key="EndPointToStringConverter"/>
+	</mx:MxWindow.Resources>
+
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+
+		<ListBox Grid.Column="0" ItemsSource="{Binding MyObjects}" SelectedItem="{Binding SelectedMyObject, Mode=OneWayToSource}">
+			<ListBox.ItemTemplate>
+				<DataTemplate DataType="models:MyObject">
+					<Border>
+						<TextBlock Text="{Binding Login}"/>
+					</Border>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+
+		<mxpg:PropertyGridControl Grid.Column="1" SelectedObject="{Binding SelectedMyObject}">
+			<mxpg:PropertyGridControl.CellTemplate>
+				<root:CellTemplateLocator>
+					<DataTemplate DataType="sysnet:EndPoint">
+						<mxe:TextEditor ValidateOnInput="True" EditorValue="{Binding, Converter={StaticResource EndPointToStringConverter}}"/>
+					</DataTemplate>
+
+					<DataTemplate DataType="syssec:SecureString">
+						<mxe:ButtonEditor ValidateOnInput="True" EditorValue="{Binding, Converter={StaticResource SecureStringToStringConverter}}"/>
+					</DataTemplate>
+
+					<DataTemplate DataType="sys:String">
+						<mxe:TextEditor ValidateOnInput="True" EditorValue="{Binding Value}"/>
+					</DataTemplate>
+
+					<DataTemplate DataType="sys:Int32">
+						<mxe:SpinEditor  EditorValue="{Binding Value}"/>
+					</DataTemplate>
+				</root:CellTemplateLocator>
+			</mxpg:PropertyGridControl.CellTemplate>
+		</mxpg:PropertyGridControl>
+	</Grid>
+</mx:MxWindow>
