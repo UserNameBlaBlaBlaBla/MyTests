@@ -2,6 +2,7 @@
 using EremexPropertyGridTest.Models;
 using System.Collections.ObjectModel;
 using System.Net;
+using System.Security;
 
 namespace EremexPropertyGridTest.ViewModels
 {
@@ -15,11 +16,15 @@ namespace EremexPropertyGridTest.ViewModels
 
         public MainWindowViewModel()
         {
+            var secureString = new SecureString();
+            foreach (var ch in "qwe_password")
+                secureString.AppendChar(ch);
+
             MyObjects = new ObservableCollection<MyObject>()
             {
-                new MyObject(){ Login = "qwe"}, // у этого объекта в PropertyGrid зависает фокус на свойствах login и password
-                new MyObject(){ Login = "asd", EndPoint = new DnsEndPoint("127.0.0.1", 1234)}, // // у этого объекта в PropertyGrid фокус зависнет только на свойстве password
-                new MyObject(){ Login = "zxc"} // у этого объекта в PropertyGrid зависает фокус на свойствах login и password
+                new MyObject(){ Login = "qwe", EndPoint = new DnsEndPoint("127.0.0.1", 1234), Password = secureString},
+                new MyObject(){ Login = "asd", EndPoint = new DnsEndPoint("127.0.0.1", 1234)},
+                new MyObject(){ Login = "zxc"}
             };
         }
     }

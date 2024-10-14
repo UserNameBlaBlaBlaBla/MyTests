@@ -49,11 +49,11 @@
 			<mxpg:PropertyGridControl.CellTemplate>
 				<root:CellTemplateLocator>
 					<DataTemplate DataType="sysnet:EndPoint">
-						<mxe:TextEditor EditorValue="{Binding, Converter={StaticResource EndPointToStringConverter}}"/>
+						<mxe:TextEditor EditorValue="{Binding Value, Converter={StaticResource EndPointToStringConverter}}"/>
 					</DataTemplate>
 
 					<DataTemplate DataType="syssec:SecureString">
-						<mxe:ButtonEditor EditorValue="{Binding, Converter={StaticResource SecureStringToStringConverter}}"/>
+						<mxe:ButtonEditor EditorValue="{Binding Value, Converter={StaticResource SecureStringToStringConverter}}"/>
 					</DataTemplate>
 
 					<DataTemplate DataType="sys:String">
@@ -61,7 +61,7 @@
 					</DataTemplate>
 
 					<DataTemplate DataType="sys:Int32">
-						<mxe:SpinEditor  EditorValue="{Binding Value}"/>
+						<mxe:SpinEditor EditorValue="{Binding Value}"/>
 					</DataTemplate>
 				</root:CellTemplateLocator>
 			</mxpg:PropertyGridControl.CellTemplate>

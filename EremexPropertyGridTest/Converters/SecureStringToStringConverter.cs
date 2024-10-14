@@ -1,5 +1,4 @@
 ﻿using Avalonia.Data.Converters;
-using Eremex.AvaloniaUI.Controls.PropertyGrid;
 using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
@@ -14,9 +13,7 @@ namespace EremexPropertyGridTest.Converters
             if (value == null)
                 return string.Empty;
 
-            var propertyGridEditableNode = (IPropertyGridEditableNode)value;
-
-            if (propertyGridEditableNode.DataObject is SecureString secureString)
+            if (value is SecureString secureString)
             {
                 if (value == null)
                     return null;
@@ -38,7 +35,15 @@ namespace EremexPropertyGridTest.Converters
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            var valueString = value as string;
+
+            if (string.IsNullOrEmpty(valueString))
+                return null;
+
+            var secureString = new SecureString();
+            foreach (var c in valueString)
+                secureString.AppendChar(c);
+            return secureString;
         }
     }
 }
