@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using EremexPropertyGridTest.Models;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Net;
 using System.Security;
 
