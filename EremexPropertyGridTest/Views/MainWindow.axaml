@@ -29,11 +29,15 @@
 		<converters:EndPointToStringConverter x:Key="EndPointToStringConverter"/>
 	</mx:MxWindow.Resources>
 
-	<Grid>
+	<Grid ShowGridLines="True">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
+		</Grid.RowDefinitions>
 
 		<ListBox Grid.Column="0" ItemsSource="{Binding MyObjects}" SelectedItem="{Binding SelectedMyObject, Mode=OneWayToSource}">
 			<ListBox.ItemTemplate>
@@ -45,7 +49,8 @@
 			</ListBox.ItemTemplate>
 		</ListBox>
 
-		<mxpg:PropertyGridControl Grid.Column="1" SelectedObject="{Binding SelectedMyObject}">
+		<mxpg:PropertyGridControl Grid.Column="1" SelectedObject="{Binding SelectedMyObject}" 
+								  UsingComplexDataContext="PropertyGridControl_UsingComplexDataContext">
 			<mxpg:PropertyGridControl.CellTemplate>
 				<root:CellTemplateLocator>
 					<DataTemplate DataType="sysnet:EndPoint">
@@ -66,5 +71,27 @@
 				</root:CellTemplateLocator>
 			</mxpg:PropertyGridControl.CellTemplate>
 		</mxpg:PropertyGridControl>
+
+		<Grid Grid.Column="0" Grid.Row="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+			</Grid.RowDefinitions>
+
+			<ComboBox Grid.Row="0" ItemsSource="{Binding MyObjects}"/>
+			<mxe:ComboBoxEditor Grid.Row="1" ItemsSource="{Binding MyObjects}" SelectedItem="{Binding SelectedMyObject}" DisplayMember="Login"/> <!--выдает ошибку-->
+			<mxe:ComboBoxEditor Grid.Row="2" ItemsSource="{Binding MyObjects}" SelectedItem="{Binding SelectedMyObject}"/>
+		</Grid>
+		
+		<Grid Grid.Column="1" Grid.Row="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+			</Grid.RowDefinitions>
+
+			<ComboBox Grid.Row="0" ItemsSource="{Binding MyStrings}"/>
+			<mxe:ComboBoxEditor Grid.Row="1" ItemsSource="{Binding MyStrings}"/>
+		</Grid>
 	</Grid>
 </mx:MxWindow>

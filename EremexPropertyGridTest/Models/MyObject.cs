@@ -22,5 +22,10 @@ namespace EremexPropertyGridTest.Models
         [Range(0, 10, ErrorMessage = "Value for {0} must be between {1} and {2}.")]
         [Required(ErrorMessage = "Not specified.")]
         public int Integer { get; set; }
+
+        public override string ToString()
+        {
+            return $"override ToString: {Login}";
+        }
     }
 }

@@ -1,5 +1,3 @@
-using Avalonia.Controls;
-
 using Eremex.AvaloniaUI.Controls.Common;
 
 namespace EremexPropertyGridTest.Views
@@ -9,6 +7,11 @@ namespace EremexPropertyGridTest.Views
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void PropertyGridControl_UsingComplexDataContext(object? sender, Eremex.AvaloniaUI.Controls.PropertyGrid.UsingComplexDataContextEventArgs e)
+        {
+            e.Cancel = e.Value is object;
         }
     }
 }
