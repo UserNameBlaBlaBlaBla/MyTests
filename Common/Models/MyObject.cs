@@ -2,7 +2,7 @@
 using System.Net;
 using System.Security;
 
-namespace EremexPropertyGridTest.Models
+namespace Common.Models
 {
     public partial class MyObject
     {

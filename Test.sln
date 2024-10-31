@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EremexPropertyGridTest", "EremexPropertyGridTest\EremexPropertyGridTest.csproj", "{399553FF-EF63-41E3-A073-6E85E46D34A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EremexPropertyGridTest", "EremexPropertyGridTest\EremexPropertyGridTest.csproj", "{399553FF-EF63-41E3-A073-6E85E46D34A9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{9BFD3EFD-C21C-4337-BF97-E1E76EC346EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EremexDataGridTest", "EremexDataGridTest\EremexDataGridTest.csproj", "{C12BB0B7-9E3E-4E7A-8500-5C81718C6012}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{633D3271-A07A-4359-BF2A-B05E478F9FAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{399553FF-EF63-41E3-A073-6E85E46D34A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{399553FF-EF63-41E3-A073-6E85E46D34A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{399553FF-EF63-41E3-A073-6E85E46D34A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BFD3EFD-C21C-4337-BF97-E1E76EC346EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BFD3EFD-C21C-4337-BF97-E1E76EC346EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BFD3EFD-C21C-4337-BF97-E1E76EC346EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BFD3EFD-C21C-4337-BF97-E1E76EC346EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C12BB0B7-9E3E-4E7A-8500-5C81718C6012}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C12BB0B7-9E3E-4E7A-8500-5C81718C6012}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C12BB0B7-9E3E-4E7A-8500-5C81718C6012}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C12BB0B7-9E3E-4E7A-8500-5C81718C6012}.Release|Any CPU.Build.0 = Release|Any CPU
+		{633D3271-A07A-4359-BF2A-B05E478F9FAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{633D3271-A07A-4359-BF2A-B05E478F9FAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{633D3271-A07A-4359-BF2A-B05E478F9FAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{633D3271-A07A-4359-BF2A-B05E478F9FAA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
