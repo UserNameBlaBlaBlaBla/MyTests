@@ -6,8 +6,9 @@
         xmlns:mx="https://schemas.eremexcontrols.net/avalonia"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 		xmlns:root="using:EremexPropertyGridTest"
-		xmlns:models="using:EremexPropertyGridTest.Models"
+		xmlns:models="clr-namespace:Common.Models;assembly=Common"
 		xmlns:converters="using:EremexPropertyGridTest.Converters"
+		xmlns:editorsConverters="using:EremexPropertyGridTest.Converters.EditorsConverters"
 		xmlns:sys="clr-namespace:System;assembly=mscorlib"
 		xmlns:syssec="clr-namespace:System.Security;assembly=System.Runtime.InteropServices"
 		xmlns:sysnet="clr-namespace:System.Net;assembly=System.Net.Primitives"
@@ -27,11 +28,16 @@
 	<mx:MxWindow.Resources>
 		<converters:SecureStringToStringConverter x:Key="SecureStringToStringConverter"/>
 		<converters:EndPointToStringConverter x:Key="EndPointToStringConverter"/>
+		<editorsConverters:EnumValueToItemSourceConverter x:Key="EnumValueToItemSourceConverter"/>
 
 		<DataTemplate x:Key="MyObjectComboBoxEditorItemTemplate">
 			<TextBlock Text="{Binding Login, StringFormat={}Item template {0}}"/>
 		</DataTemplate>
 	</mx:MxWindow.Resources>
+
+	<mx:MxWindow.Styles>
+		<StyleInclude Source="/Styles/ComboBoxEditorStyles.axaml"/>
+	</mx:MxWindow.Styles>
 
 	<Grid ShowGridLines="True">
 		<Grid.ColumnDefinitions>
@@ -71,6 +77,11 @@
 
 					<DataTemplate DataType="sys:Int32">
 						<mxe:SpinEditor EditorValue="{Binding Value}"/>
+					</DataTemplate>
+
+					<DataTemplate DataType="sys:Enum">
+						<mxe:ComboBoxEditor Classes="StyledComboBoxEditor" ApplyItemTemplateToEditBox="True" EditorValue="{Binding Value}"
+											ItemsSource="{Binding Value, Converter={StaticResource EnumValueToItemSourceConverter}}"/>
 					</DataTemplate>
 				</root:CellTemplateLocator>
 			</mxpg:PropertyGridControl.CellTemplate>

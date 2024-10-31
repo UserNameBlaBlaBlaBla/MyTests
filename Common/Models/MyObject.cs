@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Common.Enums;
+using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Security;
 
@@ -22,6 +23,10 @@ namespace Common.Models
         [Range(0, 10, ErrorMessage = "Value for {0} must be between {1} and {2}.")]
         [Required(ErrorMessage = "Not specified.")]
         public int Integer { get; set; }
+
+        public EnumA EnumA { get; set; }
+
+        public EnumB EnumB { get; set; }
 
         public override string ToString()
         {
