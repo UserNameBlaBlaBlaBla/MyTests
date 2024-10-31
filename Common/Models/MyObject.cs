@@ -15,17 +15,19 @@ namespace Common.Models
         [Required(ErrorMessage = "Not specified.")]
         public SecureString Password { get; set; }
 
-        [Display(Name = "Login", GroupName = "String")]
+        [Display(Order = 3, GroupName = "Test")]
         [Required(ErrorMessage = "Not specified.")]
         public string Login { get; set; }
 
-        [Display(Name = "Integer", GroupName = "Primitive types")]
+        [Display(Order = 2, GroupName = "Test")]
         [Range(0, 10, ErrorMessage = "Value for {0} must be between {1} and {2}.")]
         [Required(ErrorMessage = "Not specified.")]
         public int Integer { get; set; }
 
+        [Display(Order = 1, GroupName = "Test")]
         public EnumA EnumA { get; set; }
 
+        [Display(Order = 4, GroupName = "Test")]
         public EnumB EnumB { get; set; }
 
         public override string ToString()
