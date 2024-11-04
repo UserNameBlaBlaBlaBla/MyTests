@@ -1,0 +1,34 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:AvaloniaDataGridTest.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="AvaloniaDataGridTest.Views.MainView"
+             x:DataType="vm:MainViewModel">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="auto"/>
+		</Grid.RowDefinitions>
+		<TextBlock Grid.Row="0" Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+		<DataGrid Grid.Row="1" ItemsSource="{Binding MyObjects}">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Login"  Binding="{Binding Login}"/>
+			</DataGrid.Columns>
+		</DataGrid>
+		
+		<DataGrid Grid.Row="2" ItemsSource="{Binding MyNotifyCollection}">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Login"  Binding="{Binding Login}"/>
+			</DataGrid.Columns>
+		</DataGrid>
+		
+		<StackPanel Grid.Row="3" Orientation="Horizontal">
+			<Button Content="Add" Command="{Binding Add}"/>
+		</StackPanel>
+	</Grid>
+</UserControl>

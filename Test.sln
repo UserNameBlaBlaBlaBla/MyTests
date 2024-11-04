@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EremexDataGridTest", "Ereme
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{633D3271-A07A-4359-BF2A-B05E478F9FAA}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaloniaDataGridTest", "AvaloniaDataGridTest\AvaloniaDataGridTest.csproj", "{F20EFFDD-89E4-40BE-B92D-13822885A0A4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaloniaDataGridTest.Desktop", "AvaloniaDataGridTest.Desktop\AvaloniaDataGridTest.Desktop.csproj", "{01285EAE-3DAE-4773-90AB-4862FD741F44}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{633D3271-A07A-4359-BF2A-B05E478F9FAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{633D3271-A07A-4359-BF2A-B05E478F9FAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{633D3271-A07A-4359-BF2A-B05E478F9FAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F20EFFDD-89E4-40BE-B92D-13822885A0A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F20EFFDD-89E4-40BE-B92D-13822885A0A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F20EFFDD-89E4-40BE-B92D-13822885A0A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F20EFFDD-89E4-40BE-B92D-13822885A0A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01285EAE-3DAE-4773-90AB-4862FD741F44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01285EAE-3DAE-4773-90AB-4862FD741F44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01285EAE-3DAE-4773-90AB-4862FD741F44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01285EAE-3DAE-4773-90AB-4862FD741F44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

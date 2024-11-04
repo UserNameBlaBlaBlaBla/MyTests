@@ -1,0 +1,56 @@
+<mx:MxWindow xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:EremexDataGridTest.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mx="https://schemas.eremexcontrols.net/avalonia"
+        xmlns:mxdg="https://schemas.eremexcontrols.net/avalonia/datagrid"
+		xmlns:mxe="https://schemas.eremexcontrols.net/avalonia/editors"
+		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="EremexDataGridTest.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+		x:CompileBindings="False"
+        Icon="/Assets/EMXControls.ico"
+        Title="EremexDataGridTest">
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="auto"/>
+		</Grid.RowDefinitions>
+
+		<Grid Grid.Row="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+
+			<mxdg:DataGridControl Grid.Column="0" 
+								  ShowGroupPanel="False"
+								  ItemsSource="{Binding MyNotifyCollection}">
+				<mxdg:DataGridControl.Columns>
+					<mxdg:GridColumn FieldName="Login" Header="Login" AllowFocus="False"/>
+					<mxdg:GridColumn FieldName="Integer" Header="Integer" AllowFocus="False"/>
+					<mxdg:GridColumn FieldName="EndPoint" Header="EndPoint" AllowFocus="False"/>
+					<mxdg:GridColumn FieldName="Password" Header="Password" AllowFocus="False" Width="*"/>
+				</mxdg:DataGridControl.Columns>
+			</mxdg:DataGridControl>
+
+			<mxdg:DataGridControl Grid.Column="1"
+								  ShowGroupPanel="False"
+								  ItemsSource="{Binding MyObjects}">
+				<mxdg:DataGridControl.Columns>
+					<mxdg:GridColumn FieldName="Login" Header="Login" AllowFocus="False"/>
+					<mxdg:GridColumn FieldName="Integer" Header="Integer" AllowFocus="False"/>
+					<mxdg:GridColumn FieldName="EndPoint" Header="EndPoint" AllowFocus="False"/>
+					<mxdg:GridColumn FieldName="Password" Header="Password" AllowFocus="False" Width="*"/>
+				</mxdg:DataGridControl.Columns>
+			</mxdg:DataGridControl>
+		</Grid>
+
+		<StackPanel Grid.Row="1" Orientation="Horizontal">
+			<Button Content="Add" Command="{Binding Add}"/>
+			<Button Content="Remove" Command="{Binding Remove}" CommandParameter="{Binding SelectedMyObject}"/>
+		</StackPanel>
+	</Grid>
+</mx:MxWindow>
