@@ -39,7 +39,7 @@ namespace EremexDataGridTest.ViewModels
         [RelayCommand]
         public void Add()
         {
-            MyObjects.Add(new MyObject());
+            MyObjects.Add(new MyObject() { Login = MyObjects.Count.ToString() });
             MyNotifyCollection.Add(new MyObject() { Login = MyNotifyCollection.Count.ToString() });
         }
 
