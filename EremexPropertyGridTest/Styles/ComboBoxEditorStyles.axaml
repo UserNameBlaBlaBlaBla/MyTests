@@ -1,13 +1,14 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:mxe="clr-namespace:Eremex.AvaloniaUI.Controls.Editors;assembly=Eremex.Avalonia.Controls"
+		xmlns:common="clr-namespace:Eremex.AvaloniaUI.Controls.Common;assembly=Eremex.Avalonia.Controls"
 		xmlns:editorsConverters="using:EremexPropertyGridTest.Converters.EditorsConverters">
 
 	<Styles.Resources>
 		<editorsConverters:EnumValueToNameConverter x:Key="EnumValueToNameConverter"/>
 
 		<CornerRadius x:Key="EditorCornerRadius">0</CornerRadius>
-		
+
 		<DataTemplate x:Key="StyledComboBoxEditorItemTemplate">
 			<Grid Classes="ItemTemplateGrid">
 				<TextBlock Margin="4" VerticalAlignment="Center" HorizontalAlignment="Stretch"
@@ -20,7 +21,7 @@
 		   mxe|ComboBoxEditor.StyledComboBoxEditor:activeMode">
 		<Setter Property="CornerRadius" Value="{StaticResource EditorCornerRadius}"/>
 		<Setter Property="ItemTemplate" Value="{StaticResource StyledComboBoxEditorItemTemplate}"/>
-		
+
 		<Style Selector="^ Grid.ItemTemplateGrid">
 			<Setter Property="Background" Value="Gray"/>
 
@@ -29,17 +30,53 @@
 			</Style>
 		</Style>
 
+		<Style Selector="^ ListBox">
+			<!-- опциональные настройки -->
+			<Setter Property="Padding" Value="0"/>
+		</Style>
+
+		<Style Selector="^ ListBoxItem">
+			<Setter Property="Background" Value="Gray"/>
+			<!-- опциональные настройки для уменьшения размера айтема-->
+			<Setter Property="Margin" Value="0"/>
+			<Setter Property="Padding" Value="0"/>
+			<Setter Property="CornerRadius" Value="0"/>
+
+		</Style>
+
+		<Style Selector="^ ListBoxItem:pointerover">
+			<Style Selector="^ /template/ ContentPresenter">
+				<Setter Property="Background" Value="Red"/>
+			</Style>
+			<Style Selector="^ Grid.ItemTemplateGrid">
+				<Setter Property="Background" Value="Green"/>
+			</Style>
+		</Style>
+
+		<Style Selector="^ ListBoxItem:selected /template/ ContentPresenter">
+			<Setter Property="Background" Value="Gray"/>
+		</Style>
+
 		<Style Selector="^ ContentPresenter#PART_ReadOnlyContentContainer">
 			<Setter Property="Margin" Value="0"/>
 			<Setter Property="VerticalAlignment" Value="Stretch"/>
+			<Setter Property="Background" Value="Gray"/>
+
+			<Style Selector="^:pointerover">
+				<Setter Property="Background" Value="Red"/>
+
+
+				<Style Selector="^ Grid.ItemTemplateGrid">
+					<Setter Property="Background" Value="Red"/>
+				</Style>
+			</Style>
 		</Style>
 
-		<Style Selector="^ DockPanel#PART_NonEditablePanel">
-			<Setter Property="VerticalAlignment" Value="Stretch"/>
+		<Style Selector="^ common|ResizeablePopup">
+			<Style Selector="^ Border">
+				<Setter Property="CornerRadius" Value="0"/>
+			</Style>
 		</Style>
 
-		<Style Selector="^ ContentPresenter#PART_NonEditablePresenter">
-			<Setter Property="VerticalAlignment" Value="Stretch"/>
-		</Style>
 	</Style>
 </Styles>
