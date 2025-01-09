@@ -27,8 +27,4 @@
     <PackageReference Include="Eremex.Avalonia.Controls" Version="$(EremexVersion)" />
     <PackageReference Include="Eremex.Avalonia.Themes.DeltaDesign" Version="$(EremexVersion)" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
-  </ItemGroup>
 </Project>

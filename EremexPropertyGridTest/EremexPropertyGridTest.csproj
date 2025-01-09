@@ -22,10 +22,10 @@
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
     <PackageReference Include="Eremex.Avalonia.Controls" Version="1.0.93" />
-    <PackageReference Include="Eremex.Avalonia.Themes.DeltaDesign" Version="$(EremexVersion)" />
+    <PackageReference Include="Eremex.Avalonia.Themes.DeltaDesign" Version="1.0.93" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
+    <ProjectReference Include="..\MyCommon\MyCommon.csproj" />
   </ItemGroup>
 </Project>

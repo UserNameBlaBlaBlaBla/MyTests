@@ -6,9 +6,10 @@
         xmlns:mx="https://schemas.eremexcontrols.net/avalonia"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 		xmlns:root="using:EremexPropertyGridTest"
-		xmlns:models="clr-namespace:Common.Models;assembly=Common"
+		xmlns:models="clr-namespace:MyCommon.Models;assembly=MyCommon"
 		xmlns:converters="using:EremexPropertyGridTest.Converters"
 		xmlns:editorsConverters="using:EremexPropertyGridTest.Converters.EditorsConverters"
+		xmlns:editorsViews="using:EremexPropertyGridTest.Views.Editors"
 		xmlns:sys="clr-namespace:System;assembly=mscorlib"
 		xmlns:syssec="clr-namespace:System.Security;assembly=System.Runtime.InteropServices"
 		xmlns:sysnet="clr-namespace:System.Net;assembly=System.Net.Primitives"
@@ -19,6 +20,7 @@
         Icon="/Assets/EMXControls.ico"
         Title="EremexPropertyGridTest">
 
+	
 	<Design.DataContext>
 		<!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
@@ -33,6 +35,33 @@
 		<DataTemplate x:Key="MyObjectComboBoxEditorItemTemplate">
 			<TextBlock Text="{Binding Login, StringFormat={}Item template {0}}"/>
 		</DataTemplate>
+
+		<root:CellTemplateLocator x:Key="CellTemplateLocator">
+			<DataTemplate DataType="sysnet:EndPoint">
+				<mxe:TextEditor EditorValue="{Binding Value, Converter={StaticResource EndPointToStringConverter}}"/>
+			</DataTemplate>
+
+			<DataTemplate DataType="syssec:SecureString">
+				<mxe:ButtonEditor EditorValue="{Binding Value, Converter={StaticResource SecureStringToStringConverter}}"/>
+			</DataTemplate>
+
+			<DataTemplate DataType="sys:String">
+				<mxe:TextEditor EditorValue="{Binding Value}"/>
+			</DataTemplate>
+
+			<DataTemplate DataType="sys:Int32">
+				<mxe:SpinEditor EditorValue="{Binding Value}"/>
+			</DataTemplate>
+
+			<DataTemplate DataType="sys:Enum">
+				<mxe:ComboBoxEditor Classes="StyledComboBoxEditor" ApplyItemTemplateToEditBox="True" EditorValue="{Binding Value}"
+									ItemsSource="{Binding Value, Converter={StaticResource EnumValueToItemSourceConverter}}"/>
+			</DataTemplate>
+
+			<DataTemplate DataType="models:MySubObject">
+				<editorsViews:BrushSettingEditor/>
+			</DataTemplate>
+		</root:CellTemplateLocator>
 	</mx:MxWindow.Resources>
 
 	<mx:MxWindow.Styles>
@@ -60,31 +89,9 @@
 		</ListBox>
 
 		<mxpg:PropertyGridControl Grid.Column="1" SelectedObject="{Binding SelectedMyObject}"
-								  UsingComplexDataContext="PropertyGridControl_UsingComplexDataContext">
-			<mxpg:PropertyGridControl.CellTemplate>
-				<root:CellTemplateLocator>
-					<DataTemplate DataType="sysnet:EndPoint">
-						<mxe:TextEditor EditorValue="{Binding Value, Converter={StaticResource EndPointToStringConverter}}"/>
-					</DataTemplate>
-
-					<DataTemplate DataType="syssec:SecureString">
-						<mxe:ButtonEditor EditorValue="{Binding Value, Converter={StaticResource SecureStringToStringConverter}}"/>
-					</DataTemplate>
-
-					<DataTemplate DataType="sys:String">
-						<mxe:TextEditor EditorValue="{Binding Value}"/>
-					</DataTemplate>
-
-					<DataTemplate DataType="sys:Int32">
-						<mxe:SpinEditor EditorValue="{Binding Value}"/>
-					</DataTemplate>
-
-					<DataTemplate DataType="sys:Enum">
-						<mxe:ComboBoxEditor Classes="StyledComboBoxEditor" ApplyItemTemplateToEditBox="True" EditorValue="{Binding Value}"
-											ItemsSource="{Binding Value, Converter={StaticResource EnumValueToItemSourceConverter}}"/>
-					</DataTemplate>
-				</root:CellTemplateLocator>
-			</mxpg:PropertyGridControl.CellTemplate>
+								  UsingComplexDataContext="PropertyGridControl_UsingComplexDataContext"
+								  CustomCellTemplateData="PropertyGridControl_CustomCellTemplateData"
+								  CellTemplate="{StaticResource CellTemplateLocator}">
 		</mxpg:PropertyGridControl>
 
 		<Grid Grid.Column="0" Grid.Row="1">
@@ -99,7 +106,8 @@
 			<mxe:ComboBoxEditor Grid.Row="1" ItemsSource="{Binding MyObjects}" SelectedItem="{Binding SelectedMyObject}"
 								DisplayMember="Login" ItemTemplate="{StaticResource MyObjectComboBoxEditorItemTemplate}"/>
 			<mxe:ComboBoxEditor Grid.Row="2" ItemsSource="{Binding MyObjects}" SelectedItem="{Binding SelectedMyObject}"
-								DisplayMember="Login"/> <!--выдает ошибку-->
+								DisplayMember="Login"/>
+			<!--выдает ошибку-->
 			<mxe:ComboBoxEditor Grid.Row="3" ItemsSource="{Binding MyObjects}" SelectedItem="{Binding SelectedMyObject}"/>
 		</Grid>
 
