@@ -3,11 +3,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:mxe="clr-namespace:Eremex.AvaloniaUI.Controls.Editors;assembly=Eremex.Avalonia.Controls"
+			 xmlns:dataContextProxy="clr-namespace:Eremex.AvaloniaUI.Controls.PropertyGrid.DataContextProxy;assembly=Eremex.Avalonia.Controls"
 			 xmlns:models="clr-namespace:MyCommon.Models;assembly=MyCommon"
 			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="EremexPropertyGridTest.Views.Editors.MySubObjectEditor"
-			 x:DataType="models:MySubObject"
-			 x:CompileBindings="False">
+			 x:DataType="models:MySubObject">
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
@@ -15,6 +15,10 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
+		<!--<mxe:SpinEditor Grid.Column="0" EditorValue="{Binding MyInteger}"/>-->
+		<!--<mxe:TextEditor Grid.Column="1" EditorValue="{Binding ((models:MySubObject)Value).MyString}"/>
+		<mxe:CheckEditor Grid.Column="2" EditorValue="{Binding ((models:MySubObject)Value).MyBool}"/>-->
+		
 		<mxe:SpinEditor Grid.Column="0" EditorValue="{Binding MyInteger}" IsEnabled="{Binding MyBool}"/>
 		<mxe:TextEditor Grid.Column="1" EditorValue="{Binding MyString}"/>
 		<mxe:CheckEditor Grid.Column="2" EditorValue="{Binding MyBool}"/>

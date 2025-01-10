@@ -59,7 +59,7 @@
 			</DataTemplate>
 
 			<DataTemplate DataType="models:MySubObject">
-				<editorsViews:MySubObjectEditor/>
+				<editorsViews:MySubObjectEditorWrap/>
 			</DataTemplate>
 		</root:CellTemplateLocator>
 	</mx:MxWindow.Resources>

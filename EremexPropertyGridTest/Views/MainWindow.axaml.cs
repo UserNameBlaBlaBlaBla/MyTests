@@ -16,10 +16,7 @@ namespace EremexPropertyGridTest.Views
 
         private void PropertyGridControl_UsingComplexDataContext(object? sender, Eremex.AvaloniaUI.Controls.PropertyGrid.UsingComplexDataContextEventArgs e)
         {
-            if (types.Contains(e.Value.GetType()))
-                e.Cancel = false;
-            else
-                e.Cancel = e.Value is object;
+            e.Cancel = e.Value is object;
         }
 
         private void PropertyGridControl_CustomCellTemplateData(object? sender, Eremex.AvaloniaUI.Controls.PropertyGrid.CustomCellTemplateDataEventArgs e)
