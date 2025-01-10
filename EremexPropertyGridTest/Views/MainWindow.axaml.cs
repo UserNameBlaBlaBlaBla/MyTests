@@ -26,8 +26,6 @@ namespace EremexPropertyGridTest.Views
         {
             if (e.Data is MySubObject mySubObject)
             {
-                //e.Row.Rows.Add(new PropertyGridRow() { FieldName = "MyInteger", DataContext = e.Data });
-                //e.Row.Rows.Add(new PropertyGridRow() { FieldName = "MyString", DataContext = e.Data });
                 var prop = e.Row.GetType().GetProperty("HasChildren");
                 prop.SetValue(e.Row, true);
             }

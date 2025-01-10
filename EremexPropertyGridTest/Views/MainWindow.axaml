@@ -1,26 +1,26 @@
 <mx:MxWindow xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:EremexPropertyGridTest.ViewModels"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:mx="https://schemas.eremexcontrols.net/avalonia"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-		xmlns:root="using:EremexPropertyGridTest"
-		xmlns:models="clr-namespace:MyCommon.Models;assembly=MyCommon"
-		xmlns:converters="using:EremexPropertyGridTest.Converters"
-		xmlns:editorsConverters="using:EremexPropertyGridTest.Converters.EditorsConverters"
-		xmlns:editorsViews="using:EremexPropertyGridTest.Views.Editors"
-		xmlns:sys="clr-namespace:System;assembly=mscorlib"
-		xmlns:syssec="clr-namespace:System.Security;assembly=System.Runtime.InteropServices"
-		xmlns:sysnet="clr-namespace:System.Net;assembly=System.Net.Primitives"
-		xmlns:mxpg="clr-namespace:Eremex.AvaloniaUI.Controls.PropertyGrid;assembly=Eremex.Avalonia.Controls"
-		xmlns:mxe="clr-namespace:Eremex.AvaloniaUI.Controls.Editors;assembly=Eremex.Avalonia.Controls"
-        x:Class="EremexPropertyGridTest.Views.MainWindow"
-        x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/EMXControls.ico"
-        Title="EremexPropertyGridTest">
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:vm="using:EremexPropertyGridTest.ViewModels"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:mx="https://schemas.eremexcontrols.net/avalonia"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:root="using:EremexPropertyGridTest"
+			 xmlns:models="clr-namespace:MyCommon.Models;assembly=MyCommon"
+			 xmlns:converters="using:EremexPropertyGridTest.Converters"
+			 xmlns:editorsConverters="using:EremexPropertyGridTest.Converters.EditorsConverters"
+			 xmlns:editorsViews="using:EremexPropertyGridTest.Views.Editors"
+			 xmlns:sys="clr-namespace:System;assembly=mscorlib"
+			 xmlns:syssec="clr-namespace:System.Security;assembly=System.Runtime.InteropServices"
+			 xmlns:sysnet="clr-namespace:System.Net;assembly=System.Net.Primitives"
+			 xmlns:mxpg="clr-namespace:Eremex.AvaloniaUI.Controls.PropertyGrid;assembly=Eremex.Avalonia.Controls"
+			 xmlns:mxe="clr-namespace:Eremex.AvaloniaUI.Controls.Editors;assembly=Eremex.Avalonia.Controls"
+			 x:Class="EremexPropertyGridTest.Views.MainWindow"
+			 x:DataType="vm:MainWindowViewModel"
+			 Icon="/Assets/EMXControls.ico"
+			 Title="EremexPropertyGridTest">
 
-	
+
 	<Design.DataContext>
 		<!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
@@ -32,34 +32,34 @@
 		<converters:EndPointToStringConverter x:Key="EndPointToStringConverter"/>
 		<editorsConverters:EnumValueToItemSourceConverter x:Key="EnumValueToItemSourceConverter"/>
 
-		<DataTemplate x:Key="MyObjectComboBoxEditorItemTemplate">
+		<DataTemplate x:Key="MyObjectComboBoxEditorItemTemplate" x:CompileBindings="False">
 			<TextBlock Text="{Binding Login, StringFormat={}Item template {0}}"/>
 		</DataTemplate>
 
 		<root:CellTemplateLocator x:Key="CellTemplateLocator">
-			<DataTemplate DataType="sysnet:EndPoint">
+			<DataTemplate DataType="sysnet:EndPoint" x:CompileBindings="False">
 				<mxe:TextEditor EditorValue="{Binding Value, Converter={StaticResource EndPointToStringConverter}}"/>
 			</DataTemplate>
 
-			<DataTemplate DataType="syssec:SecureString">
+			<DataTemplate DataType="syssec:SecureString" x:CompileBindings="False">
 				<mxe:ButtonEditor EditorValue="{Binding Value, Converter={StaticResource SecureStringToStringConverter}}"/>
 			</DataTemplate>
 
-			<DataTemplate DataType="sys:String">
+			<DataTemplate DataType="sys:String" x:CompileBindings="False">
 				<mxe:TextEditor EditorValue="{Binding Value}"/>
 			</DataTemplate>
 
-			<DataTemplate DataType="sys:Int32">
+			<DataTemplate DataType="sys:Int32" x:CompileBindings="False">
 				<mxe:SpinEditor EditorValue="{Binding Value}"/>
 			</DataTemplate>
-
-			<DataTemplate DataType="sys:Enum">
+ 
+			<DataTemplate DataType="sys:Enum" x:CompileBindings="False">
 				<mxe:ComboBoxEditor Classes="StyledComboBoxEditor" ApplyItemTemplateToEditBox="True" EditorValue="{Binding Value}"
 									ItemsSource="{Binding Value, Converter={StaticResource EnumValueToItemSourceConverter}}"/>
 			</DataTemplate>
 
 			<DataTemplate DataType="models:MySubObject">
-				<editorsViews:BrushSettingEditor/>
+				<editorsViews:MySubObjectEditor/>
 			</DataTemplate>
 		</root:CellTemplateLocator>
 	</mx:MxWindow.Resources>
@@ -74,6 +74,7 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"/>
 			<RowDefinition Height="auto"/>
 			<RowDefinition Height="auto"/>
 		</Grid.RowDefinitions>
@@ -120,5 +121,9 @@
 			<ComboBox Grid.Row="0" ItemsSource="{Binding MyStrings}"/>
 			<mxe:ComboBoxEditor Grid.Row="1" ItemsSource="{Binding MyStrings}"/>
 		</Grid>
+
+		<!--<Grid Grid.Column="0" Grid.Row="2">
+			<editorsViews:MySubObjectEditor DataContext="{Binding MySubObject}"/>
+		</Grid>-->
 	</Grid>
 </mx:MxWindow>

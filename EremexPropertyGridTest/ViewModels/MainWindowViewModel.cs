@@ -18,6 +18,9 @@ namespace EremexPropertyGridTest.ViewModels
         [ObservableProperty]
         public MyObject? selectedMyObject;
 
+        [ObservableProperty]
+        public MySubObject? mySubObject;
+
         public MainWindowViewModel()
         {
             var secureString = new SecureString();
@@ -33,6 +36,8 @@ namespace EremexPropertyGridTest.ViewModels
             };
 
             myStrings = new ObservableCollection<string>() { "first string", "second string" };
+
+            mySubObject = new MySubObject() { MyInteger = 5, MyString = "qwerty", MyBool = true };
         }
     }
 }
