@@ -1,4 +1,5 @@
 ﻿using MyCommon.Enums;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Security;
@@ -29,6 +30,9 @@ namespace MyCommon.Models
 
         [Display(Order = 4, GroupName = "Test")]
         public EnumB EnumB { get; set; }
+
+        [Display(Order = 5, GroupName = "Test")]
+        public ObservableCollection<string> Collection { get; set; }
 
         [Display(Order = 1, GroupName = "Sub")]
         public MySubObject MySubObject { get; set; } = new MySubObject();

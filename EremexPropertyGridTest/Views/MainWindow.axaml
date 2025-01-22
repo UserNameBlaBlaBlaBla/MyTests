@@ -13,6 +13,7 @@
 			 xmlns:sys="clr-namespace:System;assembly=mscorlib"
 			 xmlns:syssec="clr-namespace:System.Security;assembly=System.Runtime.InteropServices"
 			 xmlns:sysnet="clr-namespace:System.Net;assembly=System.Net.Primitives"
+			 xmlns:sysObjectModel="clr-namespace:System.Collections.ObjectModel;assembly=System.ObjectModel"
 			 xmlns:mxpg="clr-namespace:Eremex.AvaloniaUI.Controls.PropertyGrid;assembly=Eremex.Avalonia.Controls"
 			 xmlns:mxe="clr-namespace:Eremex.AvaloniaUI.Controls.Editors;assembly=Eremex.Avalonia.Controls"
 			 x:Class="EremexPropertyGridTest.Views.MainWindow"
@@ -60,6 +61,10 @@
 
 			<DataTemplate DataType="models:MySubObject">
 				<editorsViews:MySubObjectEditorWrap/>
+			</DataTemplate>
+
+			<DataTemplate DataType="sysObjectModel:ObservableCollection`1">
+				<TextBlock Text="ObservableCollection"/>
 			</DataTemplate>
 		</root:CellTemplateLocator>
 	</mx:MxWindow.Resources>

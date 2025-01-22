@@ -1,6 +1,7 @@
 using Eremex.AvaloniaUI.Controls.Common;
 using MyCommon.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace EremexPropertyGridTest.Views
@@ -21,7 +22,7 @@ namespace EremexPropertyGridTest.Views
 
         private void PropertyGridControl_CustomCellTemplateData(object? sender, Eremex.AvaloniaUI.Controls.PropertyGrid.CustomCellTemplateDataEventArgs e)
         {
-            if (e.Data is MySubObject mySubObject)
+            if (e.Data is MySubObject || e.Data is IList)
             {
                 var prop = e.Row.GetType().GetProperty("HasChildren");
                 prop.SetValue(e.Row, true);

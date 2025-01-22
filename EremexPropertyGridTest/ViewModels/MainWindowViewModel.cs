@@ -29,7 +29,7 @@ namespace EremexPropertyGridTest.ViewModels
 
             MyObjects = new ObservableCollection<MyObject>()
             {
-                new MyObject(){ Login = "qwe", EndPoint = new DnsEndPoint("127.0.0.1", 1234), Password = secureString},
+                new MyObject(){ Login = "qwe", EndPoint = new DnsEndPoint("127.0.0.1", 1234), Password = secureString, Collection = new ObservableCollection<string>(){ "a","b", "c"} },
                 new MyObject(){ Login = "asd", EndPoint = new DnsEndPoint("127.0.0.1", 1234)},
                 new MyObject(){ Login = "zxc"},
                 new MyObject()
