@@ -15,10 +15,6 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
-		<!--<mxe:SpinEditor Grid.Column="0" EditorValue="{Binding MyInteger}"/>-->
-		<!--<mxe:TextEditor Grid.Column="1" EditorValue="{Binding ((models:MySubObject)Value).MyString}"/>
-		<mxe:CheckEditor Grid.Column="2" EditorValue="{Binding ((models:MySubObject)Value).MyBool}"/>-->
-		
 		<mxe:SpinEditor Grid.Column="0" EditorValue="{Binding MyInteger}" IsEnabled="{Binding MyBool}"/>
 		<mxe:TextEditor Grid.Column="1" EditorValue="{Binding MyString}"/>
 		<mxe:CheckEditor Grid.Column="2" EditorValue="{Binding MyBool}"/>
