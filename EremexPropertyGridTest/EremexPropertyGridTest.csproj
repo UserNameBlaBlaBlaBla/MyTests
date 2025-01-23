@@ -6,7 +6,7 @@
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
 	<ApplicationManifest>app.manifest</ApplicationManifest>
 	<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-    <AvaloniaVersion>11.1.1</AvaloniaVersion>
+    <AvaloniaVersion>11.2.3</AvaloniaVersion>
     <EremexVersion>[1.0.*,)</EremexVersion>
   </PropertyGroup>
 
@@ -22,8 +22,8 @@
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
-    <PackageReference Include="Eremex.Avalonia.Controls" Version="1.0.93" />
-    <PackageReference Include="Eremex.Avalonia.Themes.DeltaDesign" Version="1.0.93" />
+    <PackageReference Include="Eremex.Avalonia.Controls" Version="1.1.91" />
+    <PackageReference Include="Eremex.Avalonia.Themes.DeltaDesign" Version="1.1.91" />
   </ItemGroup>
 
   <ItemGroup>
