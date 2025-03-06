@@ -149,7 +149,7 @@
 				<RowDefinition Height="auto"/>
 			</Grid.RowDefinitions>
 
-			<mxe:ComboBoxEditor Grid.Row="0" ItemsSource="{Binding MyObjects}" 
+			<mxe:ComboBoxEditor Grid.Row="0" ItemsSource="{Binding MyObjects}" AllowNullInput="True"
 								DisplayMember="Login" ValueMember="NullableInt" 
 								EditorValue="{Binding NullableInt, Converter={StaticResource TestConverter}}"/>
 
