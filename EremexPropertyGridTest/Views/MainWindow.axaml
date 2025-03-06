@@ -140,9 +140,21 @@
 
 			<TextBlock Grid.Row="1" Text="{Binding NullableInt, TargetNullValue=null}"/>
 		</Grid>
-		<!--<Grid Grid.Column="0" Grid.Row="2">
-			<editorsViews:MySubObjectEditor DataContext="{Binding MySubObject}"/>
-		</Grid>-->
+
+		<Grid Grid.Column="0" Grid.Row="2">
+			<!--<editorsViews:MySubObjectEditor DataContext="{Binding MySubObject}"/>-->
+
+			<Grid.RowDefinitions>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+			</Grid.RowDefinitions>
+
+			<mxe:ComboBoxEditor Grid.Row="0" ItemsSource="{Binding MyObjects}" 
+								DisplayMember="Login" ValueMember="NullableInt" 
+								EditorValue="{Binding NullableInt, Converter={StaticResource TestConverter}}"/>
+
+			<TextBlock Grid.Row="1" Text="{Binding NullableInt, TargetNullValue=null, FallbackValue=fail}"/>
+		</Grid>
 
 	</Grid>
 </mx:MxWindow>

@@ -17,13 +17,7 @@ namespace EremexPropertyGridTest.Converters
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            if (value == null)
-                return null;
-
-            if (targetType.IsAssignableFrom(value.GetType()))
-                return value;
-            else
-                return null;
+            return value;
         }
     }
 }

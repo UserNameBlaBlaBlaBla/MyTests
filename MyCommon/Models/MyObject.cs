@@ -37,6 +37,8 @@ namespace MyCommon.Models
         [Display(Order = 1, GroupName = "Sub")]
         public MySubObject MySubObject { get; set; } = new MySubObject();
 
+        public int? NullableInt { get; set; }
+
         public override string ToString()
         {
             return $"override ToString: {Login}";

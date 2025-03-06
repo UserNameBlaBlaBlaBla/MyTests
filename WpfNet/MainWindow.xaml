@@ -8,14 +8,34 @@
         Title="MainWindow" Height="450" Width="800"
         Loaded="Window_Loaded">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
-        <ListBox Grid.Row="0" ItemsSource="{Binding MyNotifyCollection}"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="1">
-            <Button Content="add" Click="Button_Click"/>
-        </StackPanel>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <ListBox Grid.Row="0" ItemsSource="{Binding MyNotifyCollection}"/>
+
+            <StackPanel Grid.Row="1">
+                <Button Content="add" Click="Button_Click"/>
+            </StackPanel>
+        </Grid>
+
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <ComboBox Grid.Row="0" ItemsSource="{Binding MyObjects}" DisplayMemberPath="Login" SelectedValuePath="NullableInt" SelectedValue="{Binding NullableInt}"/>
+
+            <TextBlock Grid.Row="1" Text="{Binding NullableInt, TargetNullValue=null, FallbackValue=fail}"/>
+        </Grid>
     </Grid>
 </Window>
