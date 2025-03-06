@@ -129,7 +129,6 @@
 			<mxe:ComboBoxEditor Grid.Row="1" ItemsSource="{Binding MyStrings}"/>
 		</Grid>
 
-<<<<<<< HEAD
 		<Grid Grid.Row="2" Grid.Column="0">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="auto"/>
@@ -141,10 +140,9 @@
 
 			<TextBlock Grid.Row="1" Text="{Binding NullableInt, TargetNullValue=null}"/>
 		</Grid>
-=======
 		<!--<Grid Grid.Column="0" Grid.Row="2">
 			<editorsViews:MySubObjectEditor DataContext="{Binding MySubObject}"/>
 		</Grid>-->
->>>>>>> e0e514ea032bb2e3bf0f32b9b5e5985376ec3363
+
 	</Grid>
 </mx:MxWindow>
