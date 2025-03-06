@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaloniaDataGridTest", "Ava
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaloniaDataGridTest.Desktop", "AvaloniaDataGridTest.Desktop\AvaloniaDataGridTest.Desktop.csproj", "{01285EAE-3DAE-4773-90AB-4862FD741F44}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTest", "WpfTest\WpfTest.csproj", "{957A76E5-AB97-411B-96B8-EB03A612047D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{01285EAE-3DAE-4773-90AB-4862FD741F44}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01285EAE-3DAE-4773-90AB-4862FD741F44}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01285EAE-3DAE-4773-90AB-4862FD741F44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{957A76E5-AB97-411B-96B8-EB03A612047D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{957A76E5-AB97-411B-96B8-EB03A612047D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{957A76E5-AB97-411B-96B8-EB03A612047D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{957A76E5-AB97-411B-96B8-EB03A612047D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -17,6 +17,9 @@ namespace EremexPropertyGridTest.ViewModels
         [ObservableProperty]
         public MyObject? selectedMyObject;
 
+        [ObservableProperty]
+        public int? nullableInt;
+
         public MainWindowViewModel()
         {
             var secureString = new SecureString();
@@ -25,10 +28,10 @@ namespace EremexPropertyGridTest.ViewModels
 
             MyObjects = new ObservableCollection<MyObject>()
             {
-                new MyObject(){ Login = "qwe", EndPoint = new DnsEndPoint("127.0.0.1", 1234), Password = secureString},
-                new MyObject(){ Login = "asd", EndPoint = new DnsEndPoint("127.0.0.1", 1234)},
-                new MyObject(){ Login = "zxc"},
-                new MyObject()
+                new MyObject(){ Login = "qwe", EndPoint = new DnsEndPoint("127.0.0.1", 1234), Password = secureString, NullableInt = 1},
+                new MyObject(){ Login = "asd", EndPoint = new DnsEndPoint("127.0.0.1", 1234), NullableInt = 2},
+                new MyObject(){ Login = "zxc", NullableInt = null},
+                new MyObject(){ NullableInt = null }
             };
 
             myStrings = new ObservableCollection<string>() { "first string", "second string" };

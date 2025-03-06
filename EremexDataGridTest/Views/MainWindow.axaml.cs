@@ -1,4 +1,5 @@
 using Eremex.AvaloniaUI.Controls.Common;
+using Eremex.AvaloniaUI.Controls.DataGrid;
 
 namespace EremexDataGridTest.Views
 {
@@ -7,6 +8,7 @@ namespace EremexDataGridTest.Views
         public MainWindow()
         {
             InitializeComponent();
+            new DataGridControl();
         }
     }
 }

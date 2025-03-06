@@ -1,4 +1,5 @@
 ﻿using Common.Enums;
+using CommunityToolkit.Mvvm.Input;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Security;
@@ -29,6 +30,19 @@ namespace Common.Models
 
         [Display(Order = 4, GroupName = "Test")]
         public EnumB EnumB { get; set; }
+
+        private int? _nullableInt;
+        public int? NullableInt
+        {
+            get => _nullableInt;
+            set => _nullableInt = value;
+        }
+
+        [RelayCommand]
+        public void Test()
+        {
+            int a = 0;
+        }
 
         public override string ToString()
         {

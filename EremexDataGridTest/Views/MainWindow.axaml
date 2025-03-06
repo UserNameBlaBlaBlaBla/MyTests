@@ -6,6 +6,8 @@
         xmlns:mx="https://schemas.eremexcontrols.net/avalonia"
         xmlns:mxdg="https://schemas.eremexcontrols.net/avalonia/datagrid"
 		xmlns:mxe="https://schemas.eremexcontrols.net/avalonia/editors"
+			 xmlns:mxvis="clr-namespace:Eremex.AvaloniaUI.Controls.DataControl.Visuals;assembly=Eremex.Avalonia.Controls"
+		xmlns:models="clr-namespace:Common.Models;assembly=Common"
 		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="EremexDataGridTest.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -23,9 +25,10 @@
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"/>
 				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
 
-			<mxdg:DataGridControl Grid.Column="0" 
+			<mxdg:DataGridControl Grid.Column="0"
 								  ShowGroupPanel="False"
 								  ItemsSource="{Binding MyNotifyCollection}">
 				<mxdg:DataGridControl.Columns>
@@ -44,8 +47,19 @@
 					<mxdg:GridColumn FieldName="Integer" Header="Integer" AllowFocus="False"/>
 					<mxdg:GridColumn FieldName="EndPoint" Header="EndPoint" AllowFocus="False"/>
 					<mxdg:GridColumn FieldName="Password" Header="Password" AllowFocus="False" Width="*"/>
+
+					<mxdg:GridColumn Header="Test">
+						<mxdg:GridColumn.CellTemplate>
+							<DataTemplate DataType="mxvis:CellData">
+								<Button Content="test"
+										Command="{Binding ((models:MyObject)Row).TestCommand}"/>
+							</DataTemplate>
+						</mxdg:GridColumn.CellTemplate>
+					</mxdg:GridColumn>
 				</mxdg:DataGridControl.Columns>
 			</mxdg:DataGridControl>
+			
+			<ListBox Grid.Column="2" ItemsSource="{Binding MyObjects}"/>
 		</Grid>
 
 		<StackPanel Grid.Row="1" Orientation="Horizontal">

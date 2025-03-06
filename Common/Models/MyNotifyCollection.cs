@@ -5,7 +5,8 @@ using System.Collections.Specialized;
 
 namespace Common.Models
 {
-    public class MyNotifyCollection : IList, INotifyCollectionChanged
+    //public class MyNotifyCollection : IList, INotifyCollectionChanged
+    public class MyNotifyCollection : IEnumerable, INotifyCollectionChanged
     {
         private readonly ObservableCollection<MyObject> _items = new ObservableCollection<MyObject>();
 
@@ -34,14 +35,14 @@ namespace Common.Models
 
         public object SyncRoot => throw new NotImplementedException();
 
-        object? IList.this[int index]
-        {
-            get => _items[index];
-            set
-            {
-                _items[index] = value as MyObject;
-            }
-        }
+        //object? IList.this[int index]
+        //{
+        //    get => _items[index];
+        //    set
+        //    {
+        //        _items[index] = value as MyObject;
+        //    }
+        //}
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 

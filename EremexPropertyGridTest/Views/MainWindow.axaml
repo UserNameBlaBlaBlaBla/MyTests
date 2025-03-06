@@ -28,6 +28,7 @@
 	<mx:MxWindow.Resources>
 		<converters:SecureStringToStringConverter x:Key="SecureStringToStringConverter"/>
 		<converters:EndPointToStringConverter x:Key="EndPointToStringConverter"/>
+		<converters:TestConverter x:Key="TestConverter"/>
 		<editorsConverters:EnumValueToItemSourceConverter x:Key="EnumValueToItemSourceConverter"/>
 
 		<DataTemplate x:Key="MyObjectComboBoxEditorItemTemplate">
@@ -45,6 +46,7 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"/>
 			<RowDefinition Height="auto"/>
 			<RowDefinition Height="auto"/>
 		</Grid.RowDefinitions>
@@ -99,7 +101,8 @@
 			<mxe:ComboBoxEditor Grid.Row="1" ItemsSource="{Binding MyObjects}" SelectedItem="{Binding SelectedMyObject}"
 								DisplayMember="Login" ItemTemplate="{StaticResource MyObjectComboBoxEditorItemTemplate}"/>
 			<mxe:ComboBoxEditor Grid.Row="2" ItemsSource="{Binding MyObjects}" SelectedItem="{Binding SelectedMyObject}"
-								DisplayMember="Login"/> <!--выдает ошибку-->
+								DisplayMember="Login"/>
+			<!--выдает ошибку-->
 			<mxe:ComboBoxEditor Grid.Row="3" ItemsSource="{Binding MyObjects}" SelectedItem="{Binding SelectedMyObject}"/>
 		</Grid>
 
@@ -111,6 +114,18 @@
 
 			<ComboBox Grid.Row="0" ItemsSource="{Binding MyStrings}"/>
 			<mxe:ComboBoxEditor Grid.Row="1" ItemsSource="{Binding MyStrings}"/>
+		</Grid>
+
+		<Grid Grid.Row="2" Grid.Column="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+			</Grid.RowDefinitions>
+			<mxe:ComboBoxEditor Grid.Row="0" ItemsSource="{Binding MyObjects}" AllowNullInput="True"
+								DisplayMember="Login" ValueMember="NullableInt"
+								EditorValue="{Binding NullableInt, Converter={StaticResource TestConverter}}"/>
+
+			<TextBlock Grid.Row="1" Text="{Binding NullableInt, TargetNullValue=null}"/>
 		</Grid>
 	</Grid>
 </mx:MxWindow>
