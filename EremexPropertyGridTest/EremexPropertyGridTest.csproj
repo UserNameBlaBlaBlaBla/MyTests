@@ -4,8 +4,9 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
-    <AvaloniaVersion>11.1.1</AvaloniaVersion>
+	<ApplicationManifest>app.manifest</ApplicationManifest>
+	<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <AvaloniaVersion>11.2.3</AvaloniaVersion>
     <EremexVersion>[1.0.*,)</EremexVersion>
   </PropertyGroup>
 
@@ -19,13 +20,18 @@
     <!--<PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />-->
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.3" />
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+<<<<<<< HEAD
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.2.3" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+=======
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+>>>>>>> e0e514ea032bb2e3bf0f32b9b5e5985376ec3363
     <PackageReference Include="Eremex.Avalonia.Controls" Version="1.1.91" />
     <PackageReference Include="Eremex.Avalonia.Themes.DeltaDesign" Version="1.1.91" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
+    <ProjectReference Include="..\MyCommon\MyCommon.csproj" />
   </ItemGroup>
 </Project>

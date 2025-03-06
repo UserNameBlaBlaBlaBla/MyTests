@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTest"
         mc:Ignorable="d"
+<<<<<<< HEAD
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -15,5 +16,11 @@
         <ComboBox Grid.Row="0" ItemsSource="{Binding MyObjects}" DisplayMemberPath="Login" SelectedValuePath="NullableInt" SelectedValue="{Binding NullableInt}"/>
 
         <TextBlock Grid.Row="1" Text="{Binding NullableInt}"/>
+=======
+        Title="MainWindow" Height="450" Width="800"
+        Loaded="Window_Loaded">
+    <Grid>
+        
+>>>>>>> e0e514ea032bb2e3bf0f32b9b5e5985376ec3363
     </Grid>
 </Window>

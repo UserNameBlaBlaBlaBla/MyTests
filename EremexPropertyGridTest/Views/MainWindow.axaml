@@ -1,23 +1,26 @@
 <mx:MxWindow xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:EremexPropertyGridTest.ViewModels"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:mx="https://schemas.eremexcontrols.net/avalonia"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-		xmlns:root="using:EremexPropertyGridTest"
-		xmlns:models="clr-namespace:Common.Models;assembly=Common"
-		xmlns:converters="using:EremexPropertyGridTest.Converters"
-		xmlns:editorsConverters="using:EremexPropertyGridTest.Converters.EditorsConverters"
-		xmlns:sys="clr-namespace:System;assembly=mscorlib"
-		xmlns:syssec="clr-namespace:System.Security;assembly=System.Runtime.InteropServices"
-		xmlns:sysnet="clr-namespace:System.Net;assembly=System.Net.Primitives"
-		xmlns:mxpg="clr-namespace:Eremex.AvaloniaUI.Controls.PropertyGrid;assembly=Eremex.Avalonia.Controls"
-		xmlns:mxe="clr-namespace:Eremex.AvaloniaUI.Controls.Editors;assembly=Eremex.Avalonia.Controls"
-        x:Class="EremexPropertyGridTest.Views.MainWindow"
-        x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/EMXControls.ico"
-        Title="EremexPropertyGridTest">
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:vm="using:EremexPropertyGridTest.ViewModels"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:mx="https://schemas.eremexcontrols.net/avalonia"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:root="using:EremexPropertyGridTest"
+			 xmlns:models="clr-namespace:MyCommon.Models;assembly=MyCommon"
+			 xmlns:converters="using:EremexPropertyGridTest.Converters"
+			 xmlns:editorsConverters="using:EremexPropertyGridTest.Converters.EditorsConverters"
+			 xmlns:editorsViews="using:EremexPropertyGridTest.Views.Editors"
+			 xmlns:sys="clr-namespace:System;assembly=mscorlib"
+			 xmlns:syssec="clr-namespace:System.Security;assembly=System.Runtime.InteropServices"
+			 xmlns:sysnet="clr-namespace:System.Net;assembly=System.Net.Primitives"
+			 xmlns:sysObjectModel="clr-namespace:System.Collections.ObjectModel;assembly=System.ObjectModel"
+			 xmlns:mxpg="clr-namespace:Eremex.AvaloniaUI.Controls.PropertyGrid;assembly=Eremex.Avalonia.Controls"
+			 xmlns:mxe="clr-namespace:Eremex.AvaloniaUI.Controls.Editors;assembly=Eremex.Avalonia.Controls"
+			 x:Class="EremexPropertyGridTest.Views.MainWindow"
+			 x:DataType="vm:MainWindowViewModel"
+			 Icon="/Assets/EMXControls.ico"
+			 Title="EremexPropertyGridTest">
+
 
 	<Design.DataContext>
 		<!-- This only sets the DataContext for the previewer in an IDE,
@@ -31,9 +34,40 @@
 		<converters:TestConverter x:Key="TestConverter"/>
 		<editorsConverters:EnumValueToItemSourceConverter x:Key="EnumValueToItemSourceConverter"/>
 
-		<DataTemplate x:Key="MyObjectComboBoxEditorItemTemplate">
+		<DataTemplate x:Key="MyObjectComboBoxEditorItemTemplate" x:CompileBindings="False">
 			<TextBlock Text="{Binding Login, StringFormat={}Item template {0}}"/>
 		</DataTemplate>
+
+		<root:CellTemplateLocator x:Key="CellTemplateLocator">
+			<DataTemplate DataType="sysnet:EndPoint" x:CompileBindings="False">
+				<mxe:TextEditor EditorValue="{Binding Value, Converter={StaticResource EndPointToStringConverter}}"/>
+			</DataTemplate>
+
+			<DataTemplate DataType="syssec:SecureString" x:CompileBindings="False">
+				<mxe:ButtonEditor EditorValue="{Binding Value, Converter={StaticResource SecureStringToStringConverter}}"/>
+			</DataTemplate>
+
+			<DataTemplate DataType="sys:String" x:CompileBindings="False">
+				<mxe:TextEditor EditorValue="{Binding Value}"/>
+			</DataTemplate>
+
+			<DataTemplate DataType="sys:Int32" x:CompileBindings="False">
+				<mxe:SpinEditor EditorValue="{Binding Value}"/>
+			</DataTemplate>
+
+			<DataTemplate DataType="sys:Enum" x:CompileBindings="False">
+				<mxe:ComboBoxEditor Classes="StyledComboBoxEditor" ApplyItemTemplateToEditBox="True" EditorValue="{Binding Value}"
+									ItemsSource="{Binding Value, Converter={StaticResource EnumValueToItemSourceConverter}}"/>
+			</DataTemplate>
+
+			<DataTemplate DataType="models:MySubObject">
+				<editorsViews:MySubObjectEditorWrap/>
+			</DataTemplate>
+
+			<DataTemplate DataType="sysObjectModel:ObservableCollection`1">
+				<TextBlock Text="ObservableCollection"/>
+			</DataTemplate>
+		</root:CellTemplateLocator>
 	</mx:MxWindow.Resources>
 
 	<mx:MxWindow.Styles>
@@ -46,6 +80,7 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
+			<RowDefinition Height="200"/>
 			<RowDefinition Height="auto"/>
 			<RowDefinition Height="auto"/>
 			<RowDefinition Height="auto"/>
@@ -62,31 +97,9 @@
 		</ListBox>
 
 		<mxpg:PropertyGridControl Grid.Column="1" SelectedObject="{Binding SelectedMyObject}"
-								  UsingComplexDataContext="PropertyGridControl_UsingComplexDataContext">
-			<mxpg:PropertyGridControl.CellTemplate>
-				<root:CellTemplateLocator>
-					<DataTemplate DataType="sysnet:EndPoint">
-						<mxe:TextEditor EditorValue="{Binding Value, Converter={StaticResource EndPointToStringConverter}}"/>
-					</DataTemplate>
-
-					<DataTemplate DataType="syssec:SecureString">
-						<mxe:ButtonEditor EditorValue="{Binding Value, Converter={StaticResource SecureStringToStringConverter}}"/>
-					</DataTemplate>
-
-					<DataTemplate DataType="sys:String">
-						<mxe:TextEditor EditorValue="{Binding Value}"/>
-					</DataTemplate>
-
-					<DataTemplate DataType="sys:Int32">
-						<mxe:SpinEditor EditorValue="{Binding Value}"/>
-					</DataTemplate>
-
-					<DataTemplate DataType="sys:Enum">
-						<mxe:ComboBoxEditor Classes="StyledComboBoxEditor" ApplyItemTemplateToEditBox="True" EditorValue="{Binding Value}"
-											ItemsSource="{Binding Value, Converter={StaticResource EnumValueToItemSourceConverter}}"/>
-					</DataTemplate>
-				</root:CellTemplateLocator>
-			</mxpg:PropertyGridControl.CellTemplate>
+								  UsingComplexDataContext="PropertyGridControl_UsingComplexDataContext"
+								  CustomCellTemplateData="PropertyGridControl_CustomCellTemplateData"
+								  CellTemplate="{StaticResource CellTemplateLocator}">
 		</mxpg:PropertyGridControl>
 
 		<Grid Grid.Column="0" Grid.Row="1">
@@ -116,6 +129,7 @@
 			<mxe:ComboBoxEditor Grid.Row="1" ItemsSource="{Binding MyStrings}"/>
 		</Grid>
 
+<<<<<<< HEAD
 		<Grid Grid.Row="2" Grid.Column="0">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="auto"/>
@@ -127,5 +141,10 @@
 
 			<TextBlock Grid.Row="1" Text="{Binding NullableInt, TargetNullValue=null}"/>
 		</Grid>
+=======
+		<!--<Grid Grid.Column="0" Grid.Row="2">
+			<editorsViews:MySubObjectEditor DataContext="{Binding MySubObject}"/>
+		</Grid>-->
+>>>>>>> e0e514ea032bb2e3bf0f32b9b5e5985376ec3363
 	</Grid>
 </mx:MxWindow>
