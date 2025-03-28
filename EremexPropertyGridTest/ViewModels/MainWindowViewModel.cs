@@ -37,7 +37,11 @@ namespace EremexPropertyGridTest.ViewModels
                 new MyObject(){ NullableInt = null }
             };
 
-            myStrings = new ObservableCollection<string>() { "first string", "second string" };
+            myStrings = new ObservableCollection<string>();
+            for (int i = 0; i < 50; i++)
+            {
+                myStrings.Add($"string {i}");
+            }
 
             mySubObject = new MySubObject() { MyInteger = 5, MyString = "qwerty", MyBool = true };
         }

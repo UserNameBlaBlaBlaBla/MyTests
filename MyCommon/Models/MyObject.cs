@@ -39,6 +39,8 @@ namespace MyCommon.Models
 
         public int? NullableInt { get; set; }
 
+        public int[] IntArray { get; set; } = new int[3] { 1, 2, 3 };
+
         public override string ToString()
         {
             return $"override ToString: {Login}";
