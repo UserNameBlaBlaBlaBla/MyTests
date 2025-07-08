@@ -74,6 +74,7 @@
 
 	<mx:MxWindow.Styles>
 		<StyleInclude Source="/Styles/ComboBoxEditorStyles.axaml"/>
+
 	</mx:MxWindow.Styles>
 
 	<Grid ShowGridLines="True">
@@ -150,6 +151,8 @@
 			<Grid.RowDefinitions>
 				<RowDefinition Height="auto"/>
 				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
 			</Grid.RowDefinitions>
 
 			<mxe:ComboBoxEditor Grid.Row="0" ItemsSource="{Binding MyObjects}" AllowNullInput="True"
@@ -157,17 +160,44 @@
 								EditorValue="{Binding NullableInt, Converter={StaticResource TestConverter}}"/>
 
 			<TextBlock Grid.Row="1" Text="{Binding NullableInt, TargetNullValue=null, FallbackValue=fail}"/>
+
+			<Button Grid.Row="2" Content="Меню">
+				<Button.Styles>
+					<Style Selector="MenuItem">
+						<Setter Property="Background" Value="Red"/>
+					</Style>
+				</Button.Styles>
+				
+				<Button.Flyout>
+					<MenuFlyout>
+						<MenuItem Header="Язык">
+							<MenuItem Header="Русский"/>
+							<MenuItem Header="Английскй"/>
+						</MenuItem>
+						<MenuItem Header="Тема">
+							<MenuItem Header="Светлая"/>
+							<MenuItem Header="Темная"/>
+						</MenuItem>
+					</MenuFlyout>
+				</Button.Flyout>
+			</Button>
+			
+			<Button Grid.Row="3" Content="новое окно" Click="Button_Click"/>
 		</Grid>
 
-		<Grid Grid.Column="1" Grid.Row="2" MaxHeight="50">
-			<mxlv:ListViewControl ItemsSource="{Binding MyObjects}" ItemLayoutMode="Stack"
-								  FocusedItem="{Binding SelectedMyObject, Mode=TwoWay}">
-				<mxlv:ListViewControl.ItemTemplate>
-					<DataTemplate DataType="models:MyObject">
-						<TextBlock Text="{Binding Login}"/>
-					</DataTemplate>
-				</mxlv:ListViewControl.ItemTemplate>
-			</mxlv:ListViewControl>
+		<Grid Grid.Column="1" Grid.Row="2">
+			<StackPanel Orientation="Vertical" Spacing="20">
+				<mxlv:ListViewControl ItemsSource="{Binding MyObjects}" ItemLayoutMode="Stack"
+									  FocusedItem="{Binding SelectedMyObject, Mode=TwoWay}">
+					<mxlv:ListViewControl.ItemTemplate>
+						<DataTemplate DataType="models:MyObject">
+							<TextBlock Text="{Binding Login}"/>
+						</DataTemplate>
+					</mxlv:ListViewControl.ItemTemplate>
+				</mxlv:ListViewControl>
+				
+				<mxlv:ListViewControl ItemsSource="{Binding MyInts}" FocusedItem="{Binding SelectedInt, Mode=TwoWay}" ItemLayoutMode="Stack"/>
+			</StackPanel>
 		</Grid>
 
 		<Grid Grid.Column="0" Grid.Row="4">

@@ -28,5 +28,11 @@ namespace EremexPropertyGridTest.Views
                 prop.SetValue(e.Row, true);
             }
         }
+
+        private void Button_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            var myWindow = new MyWindow();
+            myWindow.Show();
+        }
     }
 }

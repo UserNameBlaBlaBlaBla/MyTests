@@ -13,10 +13,16 @@ namespace EremexPropertyGridTest.ViewModels
         public ObservableCollection<string> myStrings;
 
         [ObservableProperty]
+        public ObservableCollection<int> myInts;
+
+        [ObservableProperty]
         public ObservableCollection<MyObject> myObjects;
 
         [ObservableProperty]
         public MyObject? selectedMyObject;
+
+        [ObservableProperty]
+        public int selectedInt;
 
         [ObservableProperty]
         public int? nullableInt;
@@ -36,12 +42,16 @@ namespace EremexPropertyGridTest.ViewModels
                 new MyObject(){ Login = "zxc", NullableInt = null},
                 new MyObject(){ NullableInt = null }
             };
+            SelectedMyObject = MyObjects[0];
 
             myStrings = new ObservableCollection<string>();
+            myInts = new ObservableCollection<int>();
             for (int i = 0; i < 50; i++)
             {
                 myStrings.Add($"string {i}");
+                myInts.Add(i);
             }
+            SelectedInt = MyInts[0];
 
             mySubObject = new MySubObject() { MyInteger = 5, MyString = "qwerty", MyBool = true };
         }

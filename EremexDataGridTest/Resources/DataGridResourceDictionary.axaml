@@ -1,0 +1,42 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+				  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				  xmlns:localization="clr-namespace:Eremex.AvaloniaUI.Controls.Localization;assembly=Eremex.Avalonia.Controls"
+				  xmlns:ed="clr-namespace:Eremex.AvaloniaUI.Controls.Editors;assembly=Eremex.Avalonia.Controls"
+				  xmlns:mxdcv="clr-namespace:Eremex.AvaloniaUI.Controls.DataControl.Visuals;assembly=Eremex.Avalonia.Controls"
+				  xmlns:mxdg="clr-namespace:Eremex.AvaloniaUI.Controls.DataGrid;assembly=Eremex.Avalonia.Controls">
+	<ControlTheme x:Key="{x:Type mxdcv:ColumnChooserControl}" TargetType="mxdcv:ColumnChooserControl">
+		<Setter Property="Focusable" Value="True" />
+		<Setter Property="Template">
+			<ControlTemplate>
+				<Grid Margin="{TemplateBinding Padding}" RowDefinitions="Auto, *" >
+					<ed:ButtonEditor x:Name="PART_SearchEditor"
+														 Margin="8,6"
+														 EditorValue="{Binding $parent[mxdcv:ColumnChooserControl].SearchText, Mode=TwoWay}"
+														 EditorValuePostMode="Delayed"
+														 EditorValuePostDelay="500"
+														 Watermark="{x:Static localization:ControlsResources.DataControl_ColumnChooser_SearchPromptText}"
+														 NullValueButtonPosition="EditorBox">
+					</ed:ButtonEditor>
+					<ScrollViewer Grid.Row="1" x:Name="PART_ScrollViewer" HorizontalScrollBarVisibility="Disabled">
+						<ItemsControl x:Name="PART_ColumnItemsControl" Background="Transparent">
+							<ItemsControl.ItemTemplate>
+								<DataTemplate DataType="mxdg:ColumnChooserColumnData">
+									<Grid ColumnDefinitions="Auto, *" Margin="8,0">
+										<CheckBox x:Name="PART_VisibilityCheckBox" IsChecked="{Binding Column.IsVisible}" IsEnabled="{Binding IsEnabled}" />
+										<mxdcv:ColumnHeaderControl Grid.Column="1" Column="{Binding Column}" MinHeight="30" Margin="8,0,0,0"/>
+									</Grid>
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+							<ItemsControl.ItemsPanel>
+								<ItemsPanelTemplate>
+									<StackPanel x:Name="PART_Panel" Orientation="Vertical" />
+								</ItemsPanelTemplate>
+							</ItemsControl.ItemsPanel>
+						</ItemsControl>
+					</ScrollViewer>
+					<!--<Border x:Name="PART_HeaderDropIndicator" IsHitTestVisible="False" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="{Binding DataControl.HeaderDropIndicatorWidth, RelativeSource={RelativeSource TemplatedParent}}" Background="{DynamicResource Outline/Accent/Secondary}" IsVisible="False"/>-->
+				</Grid>
+			</ControlTemplate>
+		</Setter>
+	</ControlTheme>
+</ResourceDictionary>
