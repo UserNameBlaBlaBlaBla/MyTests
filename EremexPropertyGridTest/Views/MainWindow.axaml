@@ -153,6 +153,7 @@
 				<RowDefinition Height="auto"/>
 				<RowDefinition Height="auto"/>
 				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
 			</Grid.RowDefinitions>
 
 			<mxe:ComboBoxEditor Grid.Row="0" ItemsSource="{Binding MyObjects}" AllowNullInput="True"
@@ -167,7 +168,7 @@
 						<Setter Property="Background" Value="Red"/>
 					</Style>
 				</Button.Styles>
-				
+
 				<Button.Flyout>
 					<MenuFlyout>
 						<MenuItem Header="Язык">
@@ -181,8 +182,18 @@
 					</MenuFlyout>
 				</Button.Flyout>
 			</Button>
-			
+
 			<Button Grid.Row="3" Content="новое окно" Click="Button_Click"/>
+
+			<TextBlock Grid.Row="4" TextTrimming="CharacterEllipsis"
+					   Text="11111111111111111111111111111111111111111111111111111111111111111">
+				<ToolTip.Tip>
+					<StackPanel>
+						<TextBlock Text="123"/>
+						<TextBlock Text="456"/>
+					</StackPanel>
+				</ToolTip.Tip>
+			</TextBlock>
 		</Grid>
 
 		<Grid Grid.Column="1" Grid.Row="2">
@@ -195,12 +206,12 @@
 						</DataTemplate>
 					</mxlv:ListViewControl.ItemTemplate>
 				</mxlv:ListViewControl>
-				
+
 				<mxlv:ListViewControl ItemsSource="{Binding MyInts}" FocusedItem="{Binding SelectedInt, Mode=TwoWay}" ItemLayoutMode="Stack"/>
 			</StackPanel>
 		</Grid>
 
-		<Grid Grid.Column="0" Grid.Row="4">
+		<Grid Grid.Column="0" Grid.Row="3">
 			<Ellipse Width="24" Height="24"
 					 HorizontalAlignment="Center"
 					 VerticalAlignment="Center"
@@ -242,6 +253,5 @@
 				</Ellipse.Styles>
 			</Ellipse>
 		</Grid>
-
 	</Grid>
 </mx:MxWindow>
