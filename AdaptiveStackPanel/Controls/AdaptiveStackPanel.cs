@@ -6,6 +6,7 @@ using Avalonia.VisualTree;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Xml.Linq;
 
 namespace AdaptiveStackPanel.Controls
@@ -25,6 +26,7 @@ namespace AdaptiveStackPanel.Controls
         private bool _isMeasuring;
         private List<Control> _originalChildren = new();
         private bool _initialized = false;
+        private static readonly MethodInfo? _invalidateStylesMethod = typeof(Control).GetMethod("InvalidateStyles", BindingFlags.NonPublic | BindingFlags.Instance);
 
         public static readonly DirectProperty<AdaptiveStackPanel, Orientation> OrientationProperty =
             AvaloniaProperty.RegisterDirect<AdaptiveStackPanel, Orientation>(
@@ -69,6 +71,11 @@ namespace AdaptiveStackPanel.Controls
         public AdaptiveStackPanel()
         {
             InitializeComponents();
+        }
+
+        private void InvalidateStyles(Control control)
+        {
+            _invalidateStylesMethod?.Invoke(control, [false]);
         }
 
         private void InitializeComponents()
@@ -202,15 +209,23 @@ namespace AdaptiveStackPanel.Controls
                 foreach (var element in mainElements)
                 {
                     _mainStackPanel.Children.Add(element);
+                    // Принудительно обновляем стили для корректного применения Classes
+                    InvalidateStyles(element);
                 }
 
                 foreach (var element in overflowElements)
                 {
                     _overflowStackPanel.Children.Add(element);
+                    // Принудительно обновляем стили для корректного применения Classes
+                    InvalidateStyles(element);
                 }
 
                 // Показываем/скрываем кнопку переполнения
                 _overflowButton.IsVisible = overflowElements.Count > 0;
+
+                // Принудительно обновляем стили для внутренних панелей
+                InvalidateStyles(_mainStackPanel);
+                InvalidateStyles(_overflowStackPanel);
 
                 // Измеряем наши внутренние контролы
                 _mainStackPanel.Measure(constraint);
