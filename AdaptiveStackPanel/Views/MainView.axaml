@@ -24,16 +24,11 @@
 		<TextBlock Text="Горизонтальная ориентация:" FontWeight="Bold"/>
 		<Grid>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="2*"/>
+				<ColumnDefinition Width="*"/>
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
+			
 			<controls:AdaptiveStackPanel Grid.Column="0" Orientation="Horizontal" Spacing="5">
-				<controls:AdaptiveStackPanel.Styles>
-					<Style Selector="Button.Test">
-						<Setter Property="Background" Value="Red"/>
-						<Setter Property="Height" Value="50"/>
-					</Style>
-				</controls:AdaptiveStackPanel.Styles>
 				<Button Classes="Test" Content="Кнопка 1"/>
 				<Button Content="Кнопка 2"/>
 				<Button Content="Кнопка 3"/>
