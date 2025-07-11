@@ -1,0 +1,51 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:AdaptiveStackPanel.ViewModels"
+             xmlns:controls="clr-namespace:AdaptiveStackPanel.Controls"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="AdaptiveStackPanel.Views.MainView"
+             x:DataType="vm:MainViewModel">
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:MainViewModel />
+	</Design.DataContext>
+
+	<UserControl.Styles>
+		<Style Selector="Button.Test">
+			<Setter Property="Background" Value="Red"/>
+			<Setter Property="Height" Value="50"/>
+		</Style>
+	</UserControl.Styles>
+
+	<StackPanel Orientation="Vertical" Spacing="20" Margin="10">
+		<TextBlock Text="Горизонтальная ориентация:" FontWeight="Bold"/>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="2*"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			<controls:AdaptiveStackPanel Grid.Column="0" Orientation="Horizontal" Spacing="5">
+				<controls:AdaptiveStackPanel.Styles>
+					<Style Selector="Button.Test">
+						<Setter Property="Background" Value="Red"/>
+						<Setter Property="Height" Value="50"/>
+					</Style>
+				</controls:AdaptiveStackPanel.Styles>
+				<Button Classes="Test" Content="Кнопка 1"/>
+				<Button Content="Кнопка 2"/>
+				<Button Content="Кнопка 3"/>
+				<Button Content="Кнопка 4"/>
+				<Button Content="Кнопка 5"/>
+			</controls:AdaptiveStackPanel>
+			
+			<controls:AdaptiveStackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5" Direction="{x:Static controls:AdaptiveStackPanelDirection.LeftToRight}">
+				<Button Content="Кнопка 1"/>
+				<Button Content="Кнопка 2"/>
+				<Button Content="Кнопка 3"/>
+			</controls:AdaptiveStackPanel>
+		</Grid>
+	</StackPanel>
+</UserControl>
