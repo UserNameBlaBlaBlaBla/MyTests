@@ -186,12 +186,14 @@ namespace AdaptiveStackPanel.Controls
                 var mainElements = new List<Control>();
                 var overflowElements = new List<Control>();
 
+                var moveAllNextToOverflowStackPanel = false;
+
                 for (int i = 0; i < _originalChildren.Count; i++)
                 {
                     var elementSize = _orientation == Orientation.Horizontal ? childSizes[i].Width : childSizes[i].Height;
                     var spacing = i > 0 ? _spacing : 0;
 
-                    if (currentSize + elementSize + spacing <= availableForMain)
+                    if (currentSize + elementSize + spacing <= availableForMain && !moveAllNextToOverflowStackPanel)
                     {
                         mainElements.Add(Direction == AdaptiveStackPanelDirection.RightToLeft ? _originalChildren[i] : _originalChildren[_originalChildren.Count - i - 1]);
                         currentSize += elementSize + spacing;
@@ -199,6 +201,7 @@ namespace AdaptiveStackPanel.Controls
                     else
                     {
                         overflowElements.Add(Direction == AdaptiveStackPanelDirection.RightToLeft ? _originalChildren[i] : _originalChildren[_originalChildren.Count - i - 1]);
+                        moveAllNextToOverflowStackPanel = true;
                     }
                 }
 
