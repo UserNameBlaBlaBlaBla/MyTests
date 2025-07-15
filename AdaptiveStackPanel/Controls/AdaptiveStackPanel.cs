@@ -282,15 +282,18 @@ namespace AdaptiveStackPanel.Controls
                         _overflowButton.Arrange(new Rect(mainSize.Width, 0, overflowButtonSize.Width, finalSize.Height));
                     }
                 }
-                else 
+                else
                 {
                     // Размещаем кнопку переполнения слева
                     if (_overflowButton.IsVisible)
                     {
-                        _overflowButton.Arrange(new Rect(0, 0, overflowButtonSize.Width, finalSize.Height));
-                        
+                        if (_mainStackPanel.Children.Count > 0)
+                            _overflowButton.Arrange(new Rect(finalSize.Width - overflowButtonSize.Width - mainSize.Width, 0, overflowButtonSize.Width, finalSize.Height));
+                        else
+                            _overflowButton.Arrange(new Rect(finalSize.Width - overflowButtonSize.Width, 0, overflowButtonSize.Width, finalSize.Height));
+
                         // Размещаем основной StackPanel справа от кнопки
-                        _mainStackPanel.Arrange(new Rect(overflowButtonSize.Width, 0, mainSize.Width, finalSize.Height));
+                        _mainStackPanel.Arrange(new Rect(finalSize.Width - mainSize.Width, 0, mainSize.Width, finalSize.Height));
                     }
                     else
                     {

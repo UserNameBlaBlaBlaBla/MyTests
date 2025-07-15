@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:AdaptiveStackPanel.ViewModels"
              xmlns:controls="clr-namespace:AdaptiveStackPanel.Controls"
+             xmlns:converters="clr-namespace:AdaptiveStackPanel.Converters"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="AdaptiveStackPanel.Views.MainView"
              x:DataType="vm:MainViewModel">
@@ -12,6 +13,10 @@
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
 		<vm:MainViewModel />
 	</Design.DataContext>
+
+	<UserControl.Resources>
+		<converters:TabDockGridBoundsToColumnGridLengthMultiConverter x:Key ="TabDockGridBoundsToColumnGridLengthMultiConverter"/>
+	</UserControl.Resources>
 
 	<UserControl.Styles>
 		<Style Selector="Button.Test">
@@ -22,21 +27,39 @@
 
 	<StackPanel Orientation="Vertical" Spacing="20" Margin="10">
 		<TextBlock Text="Горизонтальная ориентация:" FontWeight="Bold"/>
-		<Grid>
+		<Grid Name="MainGrid">
 			<Grid.ColumnDefinitions>
+				<!--<ColumnDefinition>
+					<ColumnDefinition.Width>
+						<MultiBinding Converter="{StaticResource TabDockGridBoundsToColumnGridLengthMultiConverter}">
+							<Binding Path="Bounds" ElementName="FirstAdaptiveStackPanel"/>
+							<Binding Path="Bounds" ElementName="Button11"/>
+							<Binding Path="Bounds" ElementName="Button12"/>
+							<Binding Path="Bounds" ElementName="Button13"/>
+							<Binding Path="Bounds" ElementName="Button14"/>
+							<Binding Path="Bounds" ElementName="Button15"/>
+						</MultiBinding>
+					</ColumnDefinition.Width>
+				</ColumnDefinition>-->
 				<ColumnDefinition Width="*"/>
+				
+				<!--<ColumnDefinition Width="*"/>-->
+				
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
 			
-			<controls:AdaptiveStackPanel Grid.Column="0" Orientation="Horizontal" Spacing="5">
-				<Button Classes="Test" Content="Кнопка 1"/>
-				<Button Content="Кнопка 2"/>
-				<Button Content="Кнопка 3"/>
-				<Button Content="Кнопка 4"/>
-				<Button Content="Кнопка 5"/>
+			<controls:AdaptiveStackPanel Grid.Column="0" Orientation="Horizontal" Spacing="5" Name="FirstAdaptiveStackPanel" Background="Red">
+				<Button Content="1111111111111111111111111" Name="Button11"/>
+				<Button Content="222222222" Name="Button12"/>
+				<Button Content="333333333" Name="Button13"/>
+				<Button Content="4444444444444444" Name="Button14"/>
+				<Button Content="5555555555555555" Name="Button15"/>
 			</controls:AdaptiveStackPanel>
 			
-			<controls:AdaptiveStackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5" Direction="{x:Static controls:AdaptiveStackPanelDirection.LeftToRight}">
+			<!--<Border Grid.Column="1" Background="Red"/>-->
+			
+			<controls:AdaptiveStackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5" 
+										 Direction="{x:Static controls:AdaptiveStackPanelDirection.LeftToRight}" Name="SecondAdaptiveStackPanel" Background="Green">
 				<Button Content="Кнопка 1"/>
 				<Button Content="Кнопка 2"/>
 				<Button Content="Кнопка 3"/>
