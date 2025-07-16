@@ -75,7 +75,7 @@ namespace AdaptiveStackPanel.Controls
 
         private void InvalidateStyles(Control control)
         {
-            _invalidateStylesMethod?.Invoke(control, [false]);
+            _invalidateStylesMethod?.Invoke(control, [true]);
         }
 
         private void InitializeComponents()
@@ -92,7 +92,6 @@ namespace AdaptiveStackPanel.Controls
             {
                 Content = "⋮",
                 IsVisible = false,
-                Margin = new Thickness(5, 0, 0, 0)
             };
 
             // Flyout для скрытых элементов
@@ -162,17 +161,11 @@ namespace AdaptiveStackPanel.Controls
                     _initialized = true;
                 }
 
+                var wasOverflow = _overflowStackPanel.Children.Count > 0;
+
                 // Очищаем все панели
                 _mainStackPanel.Children.Clear();
                 _overflowStackPanel.Children.Clear();
-
-                // Измеряем все элементы
-                var childSizes = new List<Size>();
-                foreach (var child in _originalChildren)
-                {
-                    child.Measure(constraint);
-                    childSizes.Add(new Size(child.Bounds.Width, child.Bounds.Height));
-                }
 
                 // Измеряем кнопку переполнения для расчёта доступного пространства
                 _overflowButton.Measure(constraint);
@@ -180,7 +173,7 @@ namespace AdaptiveStackPanel.Controls
 
                 // Вычисляем доступное пространство с учётом возможной кнопки переполнения
                 var availableSpace = _orientation == Orientation.Horizontal ? constraint.Width : constraint.Height;
-                var availableForMain = availableSpace - buttonSize;
+                var availableForMain = wasOverflow ? availableSpace - buttonSize : availableSpace;
 
                 var currentSize = 0.0;
                 var mainElements = new List<Control>();
@@ -190,17 +183,22 @@ namespace AdaptiveStackPanel.Controls
 
                 for (int i = 0; i < _originalChildren.Count; i++)
                 {
-                    var elementSize = _orientation == Orientation.Horizontal ? childSizes[i].Width : childSizes[i].Height;
-                    var spacing = i > 0 ? _spacing : 0;
+                    var processingChild = Direction == AdaptiveStackPanelDirection.RightToLeft ? _originalChildren[i] : _originalChildren[_originalChildren.Count - i - 1];
+
+                    processingChild.Measure(constraint);
+                    var childSize = new Size(processingChild.Bounds.Width, processingChild.Bounds.Height);
+
+                    var elementSize = _orientation == Orientation.Horizontal ? childSize.Width : childSize.Height;
+                    var spacing = i != _originalChildren.Count - 1 ? _spacing : 0;
 
                     if (currentSize + elementSize + spacing <= availableForMain && !moveAllNextToOverflowStackPanel)
                     {
-                        mainElements.Add(Direction == AdaptiveStackPanelDirection.RightToLeft ? _originalChildren[i] : _originalChildren[_originalChildren.Count - i - 1]);
+                        mainElements.Add(processingChild);
                         currentSize += elementSize + spacing;
                     }
                     else
                     {
-                        overflowElements.Add(Direction == AdaptiveStackPanelDirection.RightToLeft ? _originalChildren[i] : _originalChildren[_originalChildren.Count - i - 1]);
+                        overflowElements.Add(processingChild);
                         moveAllNextToOverflowStackPanel = true;
                     }
                 }
