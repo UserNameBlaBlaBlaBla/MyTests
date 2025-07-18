@@ -29,6 +29,7 @@ namespace AdaptiveStackPanel.Controls
         private static readonly MethodInfo? _invalidateStylesMethod = typeof(Control).GetMethod("InvalidateStyles", BindingFlags.NonPublic | BindingFlags.Instance);
         private double _maxWidth;
         private double _maxHeight;
+        private bool _isFirstMeasure;
 
         public static readonly DirectProperty<AdaptiveStackPanel, Orientation> OrientationProperty =
             AvaloniaProperty.RegisterDirect<AdaptiveStackPanel, Orientation>(
@@ -121,6 +122,8 @@ namespace AdaptiveStackPanel.Controls
             // Добавляем дочерние элементы
             Children.Add(_mainStackPanel);
             Children.Add(_overflowButton);
+
+            _isFirstMeasure = false;
         }
 
         protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
@@ -165,6 +168,8 @@ namespace AdaptiveStackPanel.Controls
                     }
 
                     _initialized = true;
+
+                    _isFirstMeasure = true;
                 }
 
                 var wasOverflow = _overflowStackPanel.Children.Count > 0;
@@ -240,13 +245,29 @@ namespace AdaptiveStackPanel.Controls
                         }
                         else
                         {
-                            var indexFromInsert = _mainStackPanel.Children.Count == 0 ? 0 : mainElements.IndexOf(_mainStackPanel.Children.Last()) + 1;
-                            mainElements.Skip(indexFromInsert).ToList().ForEach(x =>
+                            if (_mainStackPanel.Children.Count == 0)
                             {
-                                _overflowStackPanel.Children.Remove(x);
-                                _mainStackPanel.Children.Add(x);
-                                InvalidateStyles(x);
-                            });
+                                mainElements.ForEach(x =>
+                                {
+                                    if (_isFirstMeasure || _overflowStackPanel.Children.Remove(x))
+                                    {
+                                        _mainStackPanel.Children.Add(x);
+                                        InvalidateStyles(x);
+                                    }
+                                });
+                            }
+                            else
+                            {
+                                var indexFromInsert = mainElements.IndexOf(_mainStackPanel.Children.Last()) + 1;
+                                mainElements.Skip(indexFromInsert).ToList().ForEach(x =>
+                                {
+                                    if (_overflowStackPanel.Children.Remove(x))
+                                    {
+                                        _mainStackPanel.Children.Add(x);
+                                        InvalidateStyles(x);
+                                    }
+                                });
+                            }
                         }
                     }
                     else
@@ -266,9 +287,11 @@ namespace AdaptiveStackPanel.Controls
                             {
                                 mainElements.ForEach(x =>
                                 {
-                                    _overflowStackPanel.Children.Remove(x);
-                                    _mainStackPanel.Children.Add(x);
-                                    InvalidateStyles(x);
+                                    if (_isFirstMeasure || _overflowStackPanel.Children.Remove(x))
+                                    {
+                                        _mainStackPanel.Children.Add(x);
+                                        InvalidateStyles(x);
+                                    }
                                 });
                             }
                             else
@@ -276,9 +299,11 @@ namespace AdaptiveStackPanel.Controls
                                 var indexBeforeInsert = mainElements.IndexOf(_mainStackPanel.Children.First());
                                 mainElements.Take(indexBeforeInsert).ToList().ForEach(x =>
                                 {
-                                    _overflowStackPanel.Children.Remove(x);
-                                    _mainStackPanel.Children.Insert(0, x);
-                                    InvalidateStyles(x);
+                                    if (_overflowStackPanel.Children.Remove(x))
+                                    {
+                                        _mainStackPanel.Children.Insert(0, x);
+                                        InvalidateStyles(x);
+                                    }
                                 });
                             }
                         }
@@ -322,6 +347,7 @@ namespace AdaptiveStackPanel.Controls
             finally
             {
                 _isMeasuring = false;
+                _isFirstMeasure = false;
             }
         }
 
