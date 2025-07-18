@@ -213,9 +213,17 @@ namespace AdaptiveStackPanel.Controls
                 {
                     _mainStackPanel.Children.Clear();
                     if (Direction == AdaptiveStackPanelDirection.RightToLeft)
-                        overflowElements.Where(x => x.Parent == null).ToList().ForEach(x => _overflowStackPanel.Children.Insert(0, x));
+                        overflowElements.Where(x => x.Parent == null).ToList().ForEach(x =>
+                        {
+                            _overflowStackPanel.Children.Insert(0, x);
+                            InvalidateStyles(x);
+                        });
                     else
-                        overflowElements.Where(x => x.Parent == null).ToList().ForEach(x => _overflowStackPanel.Children.Add(x));
+                        overflowElements.Where(x => x.Parent == null).ToList().ForEach(x =>
+                        {
+                            _overflowStackPanel.Children.Add(x);
+                            InvalidateStyles(x);
+                        });
                 }
                 else
                 {
@@ -237,6 +245,7 @@ namespace AdaptiveStackPanel.Controls
                             {
                                 _overflowStackPanel.Children.Remove(x);
                                 _mainStackPanel.Children.Add(x);
+                                InvalidateStyles(x);
                             });
                         }
                     }
@@ -259,6 +268,7 @@ namespace AdaptiveStackPanel.Controls
                                 {
                                     _overflowStackPanel.Children.Remove(x);
                                     _mainStackPanel.Children.Add(x);
+                                    InvalidateStyles(x);
                                 });
                             }
                             else
@@ -268,6 +278,7 @@ namespace AdaptiveStackPanel.Controls
                                 {
                                     _overflowStackPanel.Children.Remove(x);
                                     _mainStackPanel.Children.Insert(0, x);
+                                    InvalidateStyles(x);
                                 });
                             }
                         }
@@ -276,10 +287,6 @@ namespace AdaptiveStackPanel.Controls
 
                 // Показываем/скрываем кнопку переполнения
                 _overflowButton.IsVisible = overflowElements.Count > 0;
-
-                // Принудительно обновляем стили для внутренних панелей
-                InvalidateStyles(_mainStackPanel);
-                InvalidateStyles(_overflowStackPanel);
 
                 // Измеряем наши внутренние контролы
                 _mainStackPanel.Measure(constraint);
