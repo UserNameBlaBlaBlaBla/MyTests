@@ -27,6 +27,8 @@ namespace AdaptiveStackPanel.Controls
         private List<Control> _originalChildren = new();
         private bool _initialized = false;
         private static readonly MethodInfo? _invalidateStylesMethod = typeof(Control).GetMethod("InvalidateStyles", BindingFlags.NonPublic | BindingFlags.Instance);
+        private double _maxWidth;
+        private double _maxHeight;
 
         public static readonly DirectProperty<AdaptiveStackPanel, Orientation> OrientationProperty =
             AvaloniaProperty.RegisterDirect<AdaptiveStackPanel, Orientation>(
@@ -67,6 +69,10 @@ namespace AdaptiveStackPanel.Controls
             get => _direction;
             set => SetAndRaise(DirectionProperty, ref _direction, value);
         }
+
+        public double MaxWidth => _maxWidth;
+
+        public double MaxHeight => _maxHeight;
 
         public AdaptiveStackPanel()
         {
@@ -253,6 +259,9 @@ namespace AdaptiveStackPanel.Controls
                 {
                     totalSize = new Size(Math.Max(mainSize.Width, _overflowButton.DesiredSize.Width), mainSize.Height + (_overflowButton.IsVisible ? overflowButtonSize : 0));
                 }
+
+                _maxWidth = Math.Max(_maxWidth, totalSize.Width);
+                _maxHeight = Math.Max(_maxHeight, totalSize.Height);
 
                 return totalSize;
             }
