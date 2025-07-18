@@ -169,10 +169,6 @@ namespace AdaptiveStackPanel.Controls
 
                 var wasOverflow = _overflowStackPanel.Children.Count > 0;
 
-                // Очищаем все панели
-                _mainStackPanel.Children.Clear();
-                _overflowStackPanel.Children.Clear();
-
                 // Измеряем кнопку переполнения для расчёта доступного пространства
                 _overflowButton.Measure(constraint);
                 var buttonSize = _orientation == Orientation.Horizontal ? _overflowButton.DesiredSize.Width : _overflowButton.DesiredSize.Height;
@@ -213,18 +209,69 @@ namespace AdaptiveStackPanel.Controls
                     mainElements.Reverse();
 
                 // Добавляем элементы в соответствующие панели
-                foreach (var element in mainElements)
+                if (mainElements.Count == 0)
                 {
-                    _mainStackPanel.Children.Add(element);
-                    // Принудительно обновляем стили для корректного применения Classes
-                    InvalidateStyles(element);
+                    _mainStackPanel.Children.Clear();
+                    if (Direction == AdaptiveStackPanelDirection.RightToLeft)
+                        overflowElements.Where(x => x.Parent == null).ToList().ForEach(x => _overflowStackPanel.Children.Insert(0, x));
+                    else
+                        overflowElements.Where(x => x.Parent == null).ToList().ForEach(x => _overflowStackPanel.Children.Add(x));
                 }
-
-                foreach (var element in overflowElements)
+                else
                 {
-                    _overflowStackPanel.Children.Add(element);
-                    // Принудительно обновляем стили для корректного применения Classes
-                    InvalidateStyles(element);
+                    if (Direction == AdaptiveStackPanelDirection.RightToLeft)
+                    {
+                        if (mainElements.Count < _mainStackPanel.Children.Count)
+                        {
+                            var indexUntilRemove = _mainStackPanel.Children.IndexOf(mainElements.Last()) + 1;
+                            _mainStackPanel.Children.Skip(indexUntilRemove).ToList().ForEach(x =>
+                            {
+                                _mainStackPanel.Children.Remove(x);
+                                _overflowStackPanel.Children.Insert(0, x);
+                            });
+                        }
+                        else
+                        {
+                            var indexFromInsert = _mainStackPanel.Children.Count == 0 ? 0 : mainElements.IndexOf(_mainStackPanel.Children.Last()) + 1;
+                            mainElements.Skip(indexFromInsert).ToList().ForEach(x =>
+                            {
+                                _overflowStackPanel.Children.Remove(x);
+                                _mainStackPanel.Children.Add(x);
+                            });
+                        }
+                    }
+                    else
+                    {
+                        if (mainElements.Count < _mainStackPanel.Children.Count)
+                        {
+                            var indexUntilRemove = _mainStackPanel.Children.IndexOf(mainElements.First());
+                            _mainStackPanel.Children.Take(indexUntilRemove).ToList().ForEach(x =>
+                            {
+                                _mainStackPanel.Children.Remove(x);
+                                _overflowStackPanel.Children.Add(x);
+                            });
+                        }
+                        else
+                        {
+                            if (_mainStackPanel.Children.Count == 0)
+                            {
+                                mainElements.ForEach(x =>
+                                {
+                                    _overflowStackPanel.Children.Remove(x);
+                                    _mainStackPanel.Children.Add(x);
+                                });
+                            }
+                            else
+                            {
+                                var indexBeforeInsert = mainElements.IndexOf(_mainStackPanel.Children.First());
+                                mainElements.Take(indexBeforeInsert).ToList().ForEach(x =>
+                                {
+                                    _overflowStackPanel.Children.Remove(x);
+                                    _mainStackPanel.Children.Insert(0, x);
+                                });
+                            }
+                        }
+                    }
                 }
 
                 // Показываем/скрываем кнопку переполнения

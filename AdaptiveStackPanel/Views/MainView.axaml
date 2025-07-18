@@ -40,6 +40,7 @@
 				<Button Content="4444444444444444"/>
 				<Button Content="5555555555555555"/>
 			</controls:AdaptiveStackPanel>
+			<!--<TextBlock Grid.Column="0" Text="text"/>-->
 			
 			<controls:AdaptiveStackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5" 
 										 Direction="{x:Static controls:AdaptiveStackPanelDirection.LeftToRight}" Background="Green">
