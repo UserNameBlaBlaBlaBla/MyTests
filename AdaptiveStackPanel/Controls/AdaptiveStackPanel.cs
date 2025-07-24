@@ -199,7 +199,13 @@ namespace AdaptiveStackPanel.Controls
                     var elementSize = _orientation == Orientation.Horizontal ? childSize.Width : childSize.Height;
                     var spacing = i != _originalChildren.Count - 1 ? _spacing : 0;
 
-                    if (currentSize + elementSize + spacing <= availableForMain && !moveAllNextToOverflowStackPanel)
+                    var isFit = currentSize + elementSize + spacing <= availableForMain;
+                    if (i == _originalChildren.Count - 1 && wasOverflow)
+                    {
+                        isFit = currentSize + elementSize + spacing <= availableForMain + buttonSize;
+                    }
+
+                    if (isFit && !moveAllNextToOverflowStackPanel)
                     {
                         mainElements.Add(processingChild);
                         currentSize += elementSize + spacing;
