@@ -25,4 +25,8 @@
     <Folder Include="Controls\" />
     <Folder Include="Converters\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyCommon\MyCommon.csproj" />
+  </ItemGroup>
 </Project>

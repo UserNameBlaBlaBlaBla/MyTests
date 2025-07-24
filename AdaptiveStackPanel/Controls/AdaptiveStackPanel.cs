@@ -192,8 +192,9 @@ namespace AdaptiveStackPanel.Controls
                 {
                     var processingChild = Direction == AdaptiveStackPanelDirection.RightToLeft ? _originalChildren[i] : _originalChildren[_originalChildren.Count - i - 1];
 
-                    processingChild.Measure(constraint);
-                    var childSize = new Size(processingChild.Bounds.Width, processingChild.Bounds.Height);
+                    if (processingChild.IsMeasureValid)
+                        processingChild.Measure(constraint);
+                    var childSize = new Size(processingChild.DesiredSize.Width, processingChild.DesiredSize.Height);
 
                     var elementSize = _orientation == Orientation.Horizontal ? childSize.Width : childSize.Height;
                     var spacing = i != _originalChildren.Count - 1 ? _spacing : 0;
