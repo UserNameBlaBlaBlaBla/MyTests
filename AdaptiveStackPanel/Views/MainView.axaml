@@ -30,7 +30,8 @@
 
 		<StackPanel Grid.Row="0" Orientation="Vertical" Spacing="20" Margin="10">
 			<TextBlock Text="Горизонтальная ориентация:" FontWeight="Bold"/>
-			<Grid>
+			
+			<!--<Grid>
 				<Interaction.Behaviors>
 					<behaviors:AdaptiveStackPanelGridHorizontalContainerBehavior/>
 				</Interaction.Behaviors>
@@ -46,14 +47,38 @@
 					<Button Content="4444444444444444"/>
 					<Button Content="5555555555555555"/>
 				</controls:AdaptiveStackPanel>
+				--><!--<TextBlock Grid.Column="0" Text="text"/>--><!--
+
+				<controls:AdaptiveStackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5"
+										 Direction="{x:Static controls:AdaptiveStackPanelDirection.LeftToRight}" Background="Green">
+					<Button Content="Кнопка 1"/>
+					<Button Content="Кнопка 2"/>
+					<Button Content="Кнопка 3"/>
+				</controls:AdaptiveStackPanel>
+			</Grid>-->
+			
+			<Grid>
+				<Interaction.Behaviors>
+					<behaviors:AdaptiveStackPanelGridHorizontalContainerBehavior/>
+				</Interaction.Behaviors>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="auto"/>
+					<ColumnDefinition Width="auto"/>
+				</Grid.ColumnDefinitions>
+
+				<controls:AdaptiveStackPanel Grid.Column="0" Orientation="Horizontal" Spacing="5" Background="Red">
+					<Button Content="Кнопка 1"/>
+					<Button Content="Кнопка 2"/>
+					<Button Content="Кнопка 3"/>
+				</controls:AdaptiveStackPanel>
 				<!--<TextBlock Grid.Column="0" Text="text"/>-->
 
-				<controls:AdaptiveStackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5" 
+				<controls:AdaptiveStackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5"
 										 Direction="{x:Static controls:AdaptiveStackPanelDirection.LeftToRight}" Background="Green">
-				<Button Content="Кнопка 1"/>
-				<Button Content="Кнопка 2"/>
-				<Button Content="Кнопка 3"/>
-			</controls:AdaptiveStackPanel>
+					<Button Content="Кнопка 4"/>
+					<Button Content="Кнопка 5"/>
+					<Button Content="Кнопка 6"/>
+				</controls:AdaptiveStackPanel>
 			</Grid>
 		</StackPanel>
 	</Grid>
