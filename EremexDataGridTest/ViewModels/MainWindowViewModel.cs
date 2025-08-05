@@ -5,6 +5,7 @@ using Microsoft.VisualBasic;
 using System.Collections.ObjectModel;
 using System.Net;
 using System.Security;
+using Eremex.AvaloniaUI.Controls.DataGrid;
 
 namespace EremexDataGridTest.ViewModels
 {
@@ -33,7 +34,8 @@ namespace EremexDataGridTest.ViewModels
                 new MyObject()
             };
 
-            MyNotifyCollection = new MyNotifyCollection();
+            MyNotifyCollection = new MyNotifyCollection(); // login не отображается
+            //MyNotifyCollection = new MyNotifyCollection() { new MyObject() { Login = "foo" } }; // login отображается корректно
         }
 
         [RelayCommand]

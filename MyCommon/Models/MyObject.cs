@@ -1,4 +1,5 @@
-﻿using MyCommon.Enums;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using MyCommon.Enums;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
@@ -6,7 +7,7 @@ using System.Security;
 
 namespace MyCommon.Models
 {
-    public partial class MyObject
+    public partial class MyObject : ObservableValidator
     {
         [Display(Name = "Server address", GroupName = "Objects")]
         [Required(ErrorMessage = "Not specified.")]
@@ -16,14 +17,16 @@ namespace MyCommon.Models
         [Required(ErrorMessage = "Not specified.")]
         public SecureString Password { get; set; }
 
+        [ObservableProperty]
         [Display(Order = 3, GroupName = "Test")]
         [Required(ErrorMessage = "Not specified.")]
-        public string Login { get; set; }
+        private string login;
 
+        [ObservableProperty]
         [Display(Order = 2, GroupName = "Test")]
         [Range(0, 10, ErrorMessage = "Value for {0} must be between {1} and {2}.")]
         [Required(ErrorMessage = "Not specified.")]
-        public int Integer { get; set; }
+        private int integer;
 
         [Display(Order = 1, GroupName = "Test")]
         public EnumA EnumA { get; set; }

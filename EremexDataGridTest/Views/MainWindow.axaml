@@ -1,6 +1,5 @@
 <mx:MxWindow xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:EremexDataGridTest.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mx="https://schemas.eremexcontrols.net/avalonia"
@@ -8,6 +7,8 @@
 		xmlns:mxe="https://schemas.eremexcontrols.net/avalonia/editors"
 			 xmlns:mxvis="clr-namespace:Eremex.AvaloniaUI.Controls.DataControl.Visuals;assembly=Eremex.Avalonia.Controls"
 		xmlns:models="clr-namespace:MyCommon.Models;assembly=MyCommon"
+        xmlns:vm="using:EremexDataGridTest.ViewModels"
+        xmlns:views="using:EremexDataGridTest.Views"
 		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="EremexDataGridTest.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -15,6 +16,10 @@
         Icon="/Assets/EMXControls.ico"
         Title="EremexDataGridTest">
 
+	<mx:MxWindow.Resources>
+		<views:TestDataTemplate x:Key="TestDataTemplate"/>
+	</mx:MxWindow.Resources>
+	
 	<Grid ShowGridLines="True">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*"/>
@@ -32,7 +37,7 @@
 								  ShowGroupPanel="False"
 								  ItemsSource="{Binding MyNotifyCollection}">
 				<mxdg:DataGridControl.Columns>
-					<mxdg:GridColumn FieldName="Login" Header="Login" AllowFocus="False"/>
+					<mxdg:GridColumn FieldName="Login" Header="Login" AllowFocus="False" CellTemplate="{StaticResource TestDataTemplate}"/>
 					<mxdg:GridColumn FieldName="Integer" Header="Integer" AllowFocus="False"/>
 					<mxdg:GridColumn FieldName="EndPoint" Header="EndPoint" AllowFocus="False"/>
 					<mxdg:GridColumn FieldName="Password" Header="Password" AllowFocus="False" Width="*"/>
@@ -48,7 +53,7 @@
 					<mxdg:GridColumn FieldName="EndPoint" Header="EndPoint" AllowFocus="False"/>
 					<mxdg:GridColumn FieldName="Password" Header="Password" AllowFocus="False" Width="*"/>
 
-					<mxdg:GridColumn Header="Test">
+					<mxdg:GridColumn Header="Test" IsVisible="False">
 						<mxdg:GridColumn.CellTemplate>
 							<DataTemplate DataType="mxvis:CellData">
 								<Button Content="test"
